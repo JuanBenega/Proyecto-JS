@@ -1,0 +1,49 @@
+.masajes {
+    div {
+        font-family: $fuente;
+        font-size: $size-fuente-header;
+
+        h1 {
+            @extend %texto-titulos;
+            padding: $pad-h1;
+
+            @include phone {
+                padding: 10px 5px;
+            }
+        }
+
+        div {
+            div {
+                div {
+                    justify-content: center;
+
+                    div {
+                        img {
+                            object-fit: cover;
+                            @extend %sombra-imagenes;
+                        }
+                    }
+                }
+
+                div {
+                    div {
+                        text-align: center;
+                        width: 90%;
+
+                        h2 {
+                            @extend %texto-titulos;
+                        }
+
+                        @include phone {
+                            padding: $pad-bot;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include phone {
+            font-size: $size-fuente-responsive;
+        }
+    }
+}

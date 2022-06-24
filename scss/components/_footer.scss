@@ -1,0 +1,43 @@
+footer {
+    background-image: linear-gradient(to bottom, $color-fondo, $color-prim);
+    @extend %flex-evenly;
+
+    nav {
+        width: 70%;
+
+        div {
+            div {
+                div {
+                    a {
+                        &:hover {
+                            transform: scale(110%);
+                        }
+                    }
+
+                    ul {
+                        /*estilo menú footer*/
+                        font-family: $fuente;
+                        list-style: none;
+                        font-weight: bold;
+                        font-size: $size-fuente-footer;
+                        padding-left: 0px;
+                        @extend %flex-column;
+
+                        li {
+                            a {
+                                /*estilo ítems menú footer*/
+                                text-decoration: none;
+                                color: black;
+
+                                &:hover {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

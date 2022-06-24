@@ -1,0 +1,80 @@
+header {
+    background-image: linear-gradient(to top, $color-fondo, $color-dest);
+
+    nav {
+        /*estilo Nav Header*/
+        width: 95%;
+        padding-left: 75px;
+
+        div {
+            a {
+                width: 25%;
+
+                &:hover {
+                    transform: scale(110%);
+                }
+
+
+                @include phone {
+                    width: 60%;
+                }
+            }
+
+            div {
+
+                ul {
+                    li {
+                        a {
+                            font-family: $fuente;
+                            font-size: $size-fuente-header;
+                            width: auto;
+                            @extend %boton-menu;
+
+                            &:hover {
+                                @extend %boton-menu-hover;
+                                transform: scale(110%);
+                            }
+
+                            @include phone {
+                                font-size: $size-fuente-responsive;
+                                padding-left: 10px;
+                            }
+                        }
+
+                        .menu-servicios {
+                            background-color: unset;
+                            background-clip: unset;
+                            border-radius: unset;
+                            border: unset;
+
+                            li {
+                                a {
+                                    font-family: $fuente;
+                                    font-size: $size-fuente-header;
+                                    width: auto;
+                                    @extend %boton-menu;
+        
+                                    &:hover {
+                                        @extend %boton-menu-hover;
+                                        transform: scale(110%);
+                                    }
+        
+                                    @include phone {
+                                        font-size: $size-fuente-responsive;
+                                        padding-left: 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        @include phone {
+            width: auto;
+            padding-left: 0px;
+        }
+    }
+}

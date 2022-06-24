@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&family=Quicksand&display=swap');
+    </style>
+
+    <link rel="shortcut icon" href="../media/images/icon.ico" type="image/x-icon">
+
+    <title>Cuerpo y Armonía | Mejorá tu salud, tu cuerpo y tu estilo de vida</title>
+
+    <meta name="description"
+        content="Te mostramos como cambiar tu vida, dar un giro al bienestar general, tener un estilo de vida saludable">
+    <meta name="keywords"
+        content="bienestar, salud, vitalidad, entrenamiento, pilates, pilates reformer, estilo de vida, alimentación, meditación, corporal, integral, naturaleza, comida real, masajes, masajes terapeúticos, ayurveda">
+    <meta property='og:type' content="Web site">
+    <meta property='og:title' content="Cuerpo y Armonía | Mejorá tu salud, tu cuerpo y tu estilo de vida">
+    <meta property='og:url' content="https://cuerpoyarmonia.000webhostapp.com/">
+    <meta property='og:image' content="https://cuerpoyarmonia.000webhostapp.com/src/media/images/Logo2.jpg">
+
+    <!-- scripts para enviar correo por EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init('NmWDZyevDrFHicMLL');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('contact_service', 'form', this)
+                    .then(function () {
+                        console.log('SUCCESS!');
+                    }, function (error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+    <!--Header-->
+    <header class="header">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../../index.html">
+                    <img src="../media/images/Logo.png" alt="Logo Cuerpo y Armonía" class="img-fluid"
+                        srcset="../media/images/logo-small.png 175w, ../media/images//Logo.png 698w" sizes="50vw">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link m-2 p-2" href="../../index.html">Nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link m-2 p-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
+                            <ul class="dropdown-menu menu-servicios" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item m-2 p-2"
+                                        href="../pages/entrenamiento.html">Entrenamiento</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item m-2 p-2" href="../pages/masajes.html">Masajes</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ">
+                            <a class="nav-link m-2 p-2" href="../pages/bienestar.html">Artículos de Binestar</a>
+                        </li>
+                        <li ">
+                            <a class="nav-link m-2 p-2" href="../pages/contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Fin Navbar -->
+    </header>
+    <!--Fin Header-->
+
+
+    <!--Main Turno-->
+    <main class="turno">
+        <div class="container-fluid">
+            <h1>Dejanos tus datos así nos ponemos en contacto.</h1>
+            <div class="row">
+                <!-- Formulario de contacto -->
+                <div class="col-lg-6 col-sm-8">
+                    <form class="row g-3" id="form">
+                        <div class="col-10 ms-3">
+                            <label for="Name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="Name" placeholder="Nombre" name="nombre"
+                                required>
+                        </div>
+                        <div class="col-10 ms-3">
+                            <label for="LastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="LastName" placeholder="Apellido" name="apellido"
+                                required>
+                        </div>
+                        <div class="col-10 ms-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="Email" placeholder="nombre@mail.com"
+                                name="email" required>
+                        </div>
+                        <div class="col-10 ms-3">
+                            <label for="Address" class="form-label">Consulta</label>
+                            <textarea class="form-control" id="Address" name="direccion" rows="4"></textarea>
+                        </div>
+                        <div class="col-10 d-flex justify-content-end">
+                            <input type="submit" id="button" class="btn boton" value="Enviar">
+                        </div>
+                    </form>
+
+                    <!-- JS para enviar el mail por EmailJS.com -->
+                    <script type="text/javascript"
+                        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+                        </script>
+                    <script type="text/javascript">
+                        emailjs.init('NmWDZyevDrFHicMLL')
+                    </script>
+                    <!-- Fin de JS para envío de mail-->
+                </div>
+                <!-- Fin Formulario de contacto -->
+
+                <!-- Mapa -->
+                <div class="col-lg-6 col-sm-8">
+                    <iframe
+                        src="
+                    https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26248.027651402226!2d-58.64315648825943!3d-34.679862235167676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc73fed7d07ab%3A0x47e24c055bb26855!2sVicente%20L%C3%B3pez%202365%2C%20B1708HXU%20Mor%C3%B3n%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1648825366922!5m2!1ses-419!2sar"
+                        width="700vw" height="500vh" style="border:0;" allowfullscreen="" loading="lazy"
+                        alt="Ubicación en maps" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <p>Vicente Lopez 2365, Morón, Provincia de Buenos Aires</p>
+                </div>
+                <!-- Fin Mapa -->
+            </div>
+        </div>
+    </main>
+    <!--fin Main-->
+
+    <!--Footer-->
+    <footer class="footer">
+        <nav>
+            <div class="container-fluid">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-4 col-sm-11 d-flex justify-content-evenly">
+                        <!--Redes sociales-->
+                        <a href="https://web.whatsapp.com" target="_blank" class="d-flex justify-content-center">
+                            <img src="../media/images/whatsapp (1).png" alt="Whatsapp" width="30%">
+                        </a>
+                        <a href="https://www.facebook.com/cuerpo.y.armonia/" target="_blank"
+                            class="d-flex justify-content-center">
+                            <img src="../media/images/facebook (1).png" alt="Facebook" width="30%">
+                        </a>
+                        <a href="https://www.instagram.com/cuerpo.y.armonia/" target="_blank"
+                            class="d-flex justify-content-center">
+                            <img src="../media/images/instagram (1).png" alt="Instagram" width="30%">
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-sm-11 d-flex justify-content-center pt-4">
+                        <!--Menú-->
+                        <ul>
+                            <li>
+                                <a href="../pages/bienestar.html">Bienestar</a>
+                            </li>
+                            <li>
+                                <a href="../pages/entrenamiento.html">Entrenamiento</a>
+                            </li>
+                            <li>
+                                <a href="../pages/masajes.html">Masajes</a>
+                            </li>
+                            <li>
+                                <a href="../pages/contacto.html">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-sm-11 d-flex justify-content-center">
+                        <!--Logo/Inicio-->
+                        <a href="../../index.html" class="d-flex justify-content-center">
+                            <img src="../media/images/Logo-ByN.png" alt="Cuerpo y Armonía" width="70%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </footer>
+    <!--Fin del Footer-->
+
+
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Script para  cambio de mensaje en botón -->
+    <script>
+        const btn = document.getElementById('button');
+
+        document.getElementById('form')
+            .addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                btn.value = 'Enviando...';
+
+                const serviceID = 'default_service';
+                const templateID = 'template_3jestji';
+
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        btn.value = 'Enviar';
+                        alert('Mensaje enviado correctamente');
+                    }, (err) => {
+                        btn.value = 'Enviar';
+                        alert(JSON.stringify(err));
+                    });
+            });
+    </script>
+    <!-- Fin Script para  cambio de mensaje en botón -->
+</body>
+
+</html>

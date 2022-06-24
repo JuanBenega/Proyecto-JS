@@ -1,0 +1,291 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.disclaimer {
+  display: none;
+}
+
+footer nav div div div ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
+  background-color: #67b967;
+  border-radius: 10px;
+  color: lightgray;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.438);
+  transition: all 0.5s;
+}
+
+.turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
+  background-color: lightgray;
+  color: white;
+  box-shadow: none;
+}
+
+.masajes div div div div div img, .main-bien-entre div div div img, .nosotros div div div div div img {
+  margin: 25px 0px;
+  -webkit-box-shadow: 10px 11px 12px -8px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 10px 11px 12px -8px rgba(0, 0, 0, 0.36);
+  box-shadow: 10px 11px 12px -8px rgba(0, 0, 0, 0.36);
+}
+
+.turno div h1, .masajes div div div div div h2, .masajes div h1, .main-bien-entre div div div h2, .main-bien-entre div h1, .nosotros div div div h2, .nosotros div div h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+header {
+  background-image: linear-gradient(to top, white, #aa79b3);
+}
+header nav {
+  /*estilo Nav Header*/
+  width: 95%;
+  padding-left: 75px;
+}
+header nav div a {
+  width: 25%;
+}
+header nav div a:hover {
+  transform: scale(110%);
+}
+@media only screen and (max-width: 576px) {
+  header nav div a {
+    width: 60%;
+  }
+}
+header nav div div ul li a {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  width: auto;
+}
+header nav div div ul li a:hover {
+  transform: scale(110%);
+}
+@media only screen and (max-width: 576px) {
+  header nav div div ul li a {
+    font-size: 1rem;
+    padding-left: 10px;
+  }
+}
+header nav div div ul li .menu-servicios {
+  background-color: unset;
+  background-clip: unset;
+  border-radius: unset;
+  border: unset;
+}
+header nav div div ul li .menu-servicios li a {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  width: auto;
+}
+header nav div div ul li .menu-servicios li a:hover {
+  transform: scale(110%);
+}
+@media only screen and (max-width: 576px) {
+  header nav div div ul li .menu-servicios li a {
+    font-size: 1rem;
+    padding-left: 10px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header nav {
+    width: auto;
+    padding-left: 0px;
+  }
+}
+
+footer {
+  background-image: linear-gradient(to bottom, white, #67b967);
+}
+footer nav {
+  width: 70%;
+}
+footer nav div div div a:hover {
+  transform: scale(110%);
+}
+footer nav div div div ul {
+  /*estilo menú footer*/
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding-left: 0px;
+}
+footer nav div div div ul li a {
+  /*estilo ítems menú footer*/
+  text-decoration: none;
+  color: black;
+}
+footer nav div div div ul li a:hover {
+  color: white;
+}
+
+.nosotros {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+}
+.nosotros div div h1 {
+  padding: 50px 0px;
+}
+@media only screen and (max-width: 576px) {
+  .nosotros div div h1 {
+    padding: 10px 5px;
+  }
+}
+.nosotros div div div h2 {
+  padding: 25px 0px;
+}
+@media only screen and (max-width: 576px) {
+  .nosotros div div div h2 {
+    padding: 5px 5px;
+  }
+}
+.nosotros div div div p {
+  padding: 20px 50px;
+  font-size: 1.5rem;
+}
+.nosotros div div div p span {
+  font-weight: bold;
+}
+@media only screen and (max-width: 576px) {
+  .nosotros div div div p {
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+.nosotros div div div div div img {
+  object-fit: cover;
+}
+@media only screen and (max-width: 576px) {
+  .nosotros div div .imagenes {
+    display: none;
+  }
+}
+.nosotros div div .carrusel {
+  display: none;
+}
+@media only screen and (max-width: 576px) {
+  .nosotros div div .carrusel {
+    display: unset;
+    padding-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .nosotros {
+    padding: 20px 10px;
+  }
+}
+
+.main-bien-entre div {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+.main-bien-entre div h1 {
+  padding: 50px 0px;
+}
+@media only screen and (max-width: 576px) {
+  .main-bien-entre div h1 {
+    padding: 10px 5px;
+  }
+}
+.main-bien-entre div div div {
+  align-self: center;
+}
+@media only screen and (max-width: 576px) {
+  .main-bien-entre div div div {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .entrenamiento-par {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.masajes div {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+.masajes div h1 {
+  padding: 50px 0px;
+}
+@media only screen and (max-width: 576px) {
+  .masajes div h1 {
+    padding: 10px 5px;
+  }
+}
+.masajes div div div div {
+  justify-content: center;
+}
+.masajes div div div div div img {
+  object-fit: cover;
+}
+.masajes div div div div div {
+  text-align: center;
+  width: 90%;
+}
+@media only screen and (max-width: 576px) {
+  .masajes div div div div div {
+    padding: 10px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .masajes div {
+    font-size: 1rem;
+  }
+}
+
+.turno div {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+.turno div h1 {
+  padding: 50px 0px;
+}
+.turno div div div form {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+@media only screen and (max-width: 576px) {
+  .turno div div div form {
+    font-size: 1rem;
+  }
+}
+.turno div div div form div .boton:hover {
+  transform: scale(110%);
+}
+.turno div div div {
+  align-items: flex-start;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+}
+@media only screen and (max-width: 576px) {
+  .turno div div div iframe {
+    width: 95vw;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .turno div div div {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
