@@ -1,20 +1,25 @@
-let listaproductos = "1. Crema facial - $750\n2. Crema corporal - $1200\n3.Shampoo sólido - $500\n4.Shampoo líquido - % 750\n5.Crema de enjuague - $800\n6.Jabón natural - $300";
-let valorProducto1;
-let valorProducto2;
-let valorProducto3;
+//let listaproductos = ["1. Crema facial - $750", "\n2. Crema corporal - $1200", "\n3.Shampoo sólido - $500", "\n4.Shampoo líquido - $750", "\n5.Crema de enjuague - $800", "\n6.Jabón natural - $300", "\n\nPara salir presione 0"];
+let precioProducto = [];
+let producto = [];
+let listaProductos = "";
+let total = 0;
+
 let cantProductos = 3;
 let salir = false;
 
+
+function ProductoLista(item, nombre, precio) {
+    this.item = item;
+    this.nombre = nombre;
+    this.precio = precio;
+}
+
+
 function ingresoProductos(n) {
-    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + listaproductos);
+    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + listaProductos + "\nPresione 0 para salir.");
     return productoingresado;
 }
 
-
-function sumaCarrito(a, b, c) {
-    let resultado = a + b + c;
-    return resultado;
-}
 
 function valorProducto(a) {
     let valor;
@@ -37,6 +42,12 @@ function valorProducto(a) {
         case "5":
             valor = 800;
             break;
+        case "6":
+            valor = 300;
+            break;
+        case "0":
+            valor = 1111;
+            break;
         default:
             valor = 0;
             break;
@@ -44,25 +55,40 @@ function valorProducto(a) {
     return (valor);
 }
 
+let producto1 = new ProductoLista("1. ", "Crema facial", "$750");
+let producto2 = new ProductoLista("2. ", "Crema corporal", "$1200");
+let producto3 = new ProductoLista("3. ", "Shampoo sólido", "$500");
+let producto4 = new ProductoLista("4. ", "Shampoo líquido", "$750");
+let producto5 = new ProductoLista("5. ", "Crema de anjuague", "$800");
+let producto6 = new ProductoLista("6. ", "Jabón natural", "$300");
+
+let Productos = [producto1, producto2, producto3, producto4, producto5, producto6];
+
+for (const iterator of Productos) {
+    listaProductos = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
+}
 while (salir === false) {
-    alert("Hola elegí " + cantProductos + " productos para agregar al carrito de compras.\nPresioná ACEPTAR para continuar.");
+    alert("Hola elegí tu producto para agregar al carrito de compras.\nPresioná ACEPTAR para continuar.");
 
-    let producto1 = ingresoProductos(1);
-    valorProducto1 = valorProducto(producto1);
-
-    let producto2 = ingresoProductos(2);
-    valorProducto2 = valorProducto(producto2);
-
-    let producto3 = ingresoProductos(3);
-    valorProducto3 = valorProducto(producto3);
-
-
-    let total = sumaCarrito(valorProducto1, valorProducto2, valorProducto3);
-    alert("El total de la compra es: $" + total);
-
-    let salida = prompt("¿Desea salir? (Si/No)").toLowerCase();
-    if (salida === "si") {
-        salir = true;
-        alert("Muchas gracias por elegirnos!!!");
+    for (let i = 1; i < 10; i++) {
+        producto[i] = ingresoProductos(i);
+        if (producto[i] != "0") {
+            precioProducto[i] = valorProducto(producto[i]);
+            total += precioProducto[i];
+            console.log(total);
+        } else {
+            salir = true;
+            break;
+        }
+        if (i==9) {
+            salir=true;
+        }
     }
+
+    if (total != 0) {
+        alert("El total de la compra es: $" + total + "\n\n¡Muchas gracias por tu compra!");
+    } else {
+        alert("Esperamos que la próxima nos elijas...")
+    }
+
 }
