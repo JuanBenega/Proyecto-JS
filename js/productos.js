@@ -3,20 +3,17 @@ let precioProducto = [];
 let producto = [];
 let listaProductos = "";
 let total = 0;
+const carrito = [];
+let precioFiltro;
+let productosFiltrados = [];
 
 let cantProductos = 3;
 let salir = false;
 
 
-function ProductoLista(item, nombre, precio) {
-    this.item = item;
-    this.nombre = nombre;
-    this.precio = precio;
-}
-
 
 function ingresoProductos(n) {
-    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + listaProductos + "\nPresione 0 para salir.");
+    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + listaProductos + "\nPresione 8 para filtrar por precio menor." + "\nPresione 9 para filtrar por precio mayor." + "\nPresione 0 para salir.");
     return productoingresado;
 }
 
@@ -55,33 +52,57 @@ function valorProducto(a) {
     return (valor);
 }
 
-let producto1 = new ProductoLista("1. ", "Crema facial", "$750");
-let producto2 = new ProductoLista("2. ", "Crema corporal", "$1200");
-let producto3 = new ProductoLista("3. ", "Shampoo sólido", "$500");
-let producto4 = new ProductoLista("4. ", "Shampoo líquido", "$750");
-let producto5 = new ProductoLista("5. ", "Crema de anjuague", "$800");
-let producto6 = new ProductoLista("6. ", "Jabón natural", "$300");
 
-let Productos = [producto1, producto2, producto3, producto4, producto5, producto6];
+
+let Productos = [
+    { item: "1. ", nombre: "Crema facial", precio: 750 },
+    { item: "2. ", nombre: "Crema corporal", precio: 1200 },
+    { item: "3. ", nombre: "Shampoo sólido", precio: 500 },
+    { item: "4. ", nombre: "Shampoo líquido", precio: 750 },
+    { item: "5. ", nombre: "Crema de anjuague", precio: 800 },
+    { item: "6. ", nombre: "Jabón natural", precio: 300 }
+];
 
 for (const iterator of Productos) {
     listaProductos = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
 }
+console.log(Productos);
 while (salir === false) {
     alert("Hola elegí tu producto para agregar al carrito de compras.\nPresioná ACEPTAR para continuar.");
+    let filtro = alert("¿Querés aplicar algún filtro para los precios?\n\nIngresá s/n");
+    if (filtr) {
+        
+    } else {
+        
+    }
 
-    for (let i = 1; i < 10; i++) {
-        producto[i] = ingresoProductos(i);
+    for (let i = 0; i < 10; i++) {
+        producto[i] = ingresoProductos(i + 1);
         if (producto[i] != "0") {
-            precioProducto[i] = valorProducto(producto[i]);
-            total += precioProducto[i];
-            console.log(total);
+            if (producto[i] == 8) {
+                precioFiltro = prompt("Ingresa el precio máximo por que querés filtrar");
+                productosFiltrados = Productos.filter((el)=>{
+                    return el.precio < precioFiltro;
+                })
+                listaProductos = [];
+                for (const iterator of productosFiltrados) {
+                    listaProductosFiltrados = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
+                }
+                producto[i] = ingresoProductos(i + 1);
+            } else if (producto[i] == 9) {
+                precioFiltro = prompt("Ingresa el precio mínimo por que querés filtrar");
+            }
+            carrito.push(Productos[producto[i] - 1]);
+
         } else {
             salir = true;
+            for (const iterator of carrito) {
+                total += iterator.precio;
+            }
             break;
         }
-        if (i==9) {
-            salir=true;
+        if (i == 9) {
+            salir = true;
         }
     }
 
