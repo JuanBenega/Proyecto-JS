@@ -1,4 +1,3 @@
-//let listaproductos = ["1. Crema facial - $750", "\n2. Crema corporal - $1200", "\n3.Shampoo sólido - $500", "\n4.Shampoo líquido - $750", "\n5.Crema de enjuague - $800", "\n6.Jabón natural - $300", "\n\nPara salir presione 0"];
 let precioProducto = [];
 let producto = [];
 let listaProductos = "";
@@ -6,52 +5,17 @@ let total = 0;
 const carrito = [];
 let precioFiltro;
 let productosFiltrados = [];
+let opcionFiltro;
 
-let cantProductos = 3;
+let cantProductos = 10;
 let salir = false;
 
 
 
-function ingresoProductos(n) {
-    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + listaProductos + "\nPresione 8 para filtrar por precio menor." + "\nPresione 9 para filtrar por precio mayor." + "\nPresione 0 para salir.");
+function ingresoProductos(n, lista) {
+    let productoingresado = prompt("Elija el producto " + n + " de " + cantProductos + " productos a comprar: \n" + lista + "\nPresione 0 para salir.");
     return productoingresado;
 }
-
-
-function valorProducto(a) {
-    let valor;
-    switch (a) {
-        case "1":
-            valor = 750;
-            break;
-        case "2":
-            valor = 1200;
-            break;
-        case "3":
-            valor = 500;
-            break;
-        case "4":
-            valor = 750;
-            break;
-        case "4":
-            valor = 300;
-            break;
-        case "5":
-            valor = 800;
-            break;
-        case "6":
-            valor = 300;
-            break;
-        case "0":
-            valor = 1111;
-            break;
-        default:
-            valor = 0;
-            break;
-    }
-    return (valor);
-}
-
 
 
 let Productos = [
@@ -69,31 +33,45 @@ for (const iterator of Productos) {
 console.log(Productos);
 while (salir === false) {
     alert("Hola elegí tu producto para agregar al carrito de compras.\nPresioná ACEPTAR para continuar.");
-    let filtro = alert("¿Querés aplicar algún filtro para los precios?\n\nIngresá s/n");
-    if (filtr) {
-        
-    } else {
-        
+    let filtro = prompt("¿Querés aplicar algún filtro para los precios?\n\nIngresá s/n").toLocaleLowerCase();
+    if (filtro === "s") {
+        opcionFiltro = prompt("Presione 8 para filtrar por precio menor." + "\nPresione 9 para filtrar por precio mayor.");
+        if (opcionFiltro == 8) {
+            precioFiltro = prompt("Ingresa el precio máximo por el que querés filtrar");
+            productosFiltrados = Productos.filter((el) => {
+                return el.precio < precioFiltro;
+            })
+            listaProductos = [];
+            for (const iterator of productosFiltrados) {
+                listaProductos = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
+            }
+        } else if (opcionFiltro == 9) {
+            precioFiltro = prompt("Ingresa el precio mínimo por el que querés filtrar");
+            productosFiltrados = Productos.filter((el) => {
+                return el.precio > precioFiltro;
+            })
+            listaProductos = [];
+            for (const iterator of productosFiltrados) {
+                listaProductos = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
+            }
+        } else {
+            alert("Opción incorrecta vuelva a cargar la página para reiniciar la compra");
+            break;
+        }
+    } else if (filtro != "n") {
+        alert("Opción incorrecta vuelva a cargar la página para reiniciar la compra");
+        break;
     }
 
-    for (let i = 0; i < 10; i++) {
-        producto[i] = ingresoProductos(i + 1);
+    for (let i = 0; i < cantProductos; i++) {
+        producto[i] = ingresoProductos(i + 1, listaProductos);
         if (producto[i] != "0") {
-            if (producto[i] == 8) {
-                precioFiltro = prompt("Ingresa el precio máximo por que querés filtrar");
-                productosFiltrados = Productos.filter((el)=>{
-                    return el.precio < precioFiltro;
-                })
-                listaProductos = [];
-                for (const iterator of productosFiltrados) {
-                    listaProductosFiltrados = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
-                }
-                producto[i] = ingresoProductos(i + 1);
-            } else if (producto[i] == 9) {
-                precioFiltro = prompt("Ingresa el precio mínimo por que querés filtrar");
+            if (parseInt(producto[i]) < 7) {
+                carrito.push(Productos[producto[i] - 1]);
+            } else {
+                alert("Opción incorrecta");
+                break;
             }
-            carrito.push(Productos[producto[i] - 1]);
-
         } else {
             salir = true;
             for (const iterator of carrito) {
@@ -101,7 +79,7 @@ while (salir === false) {
             }
             break;
         }
-        if (i == 9) {
+        if (i == cantProductos) {
             salir = true;
         }
     }
