@@ -2,10 +2,12 @@ let precioProducto = [];
 let producto = [];
 let listaProductos = "";
 let total = 0;
-const carrito = [];
+let carrito = [];
 let precioFiltro;
 let productosFiltrados = [];
 let opcionFiltro;
+let carritoDom = document.getElementById("carrito");
+let mainDom = document.getElementById("main-productos");
 
 let cantProductos = 10;
 let salir = false;
@@ -13,27 +15,30 @@ let salir = false;
 
 
 function ingresoProductos(n, lista) {
-    let productoingresado = prompt("Elija el producto " + n + " de " + cantProductos + " productos a comprar: \n" + lista + "\nPresione 0 para salir.");
+    let productoingresado = prompt("Elija el producto " + n + " a comprar: \n" + lista + "\nPresione 0 para salir.");
     return productoingresado;
 }
 
 
 let Productos = [
-    { item: "1. ", nombre: "Crema facial", precio: 750 },
-    { item: "2. ", nombre: "Crema corporal", precio: 1200 },
-    { item: "3. ", nombre: "Shampoo sólido", precio: 500 },
-    { item: "4. ", nombre: "Shampoo líquido", precio: 750 },
-    { item: "5. ", nombre: "Crema de anjuague", precio: 800 },
-    { item: "6. ", nombre: "Jabón natural", precio: 300 }
+    { item: 1, nombre: "Crema facial", precio: 750 },
+    { item: 2, nombre: "Crema corporal", precio: 1200 },
+    { item: 3, nombre: "Shampoo sólido", precio: 500 },
+    { item: 4, nombre: "Shampoo líquido", precio: 750 },
+    { item: 5, nombre: "Crema de anjuague", precio: 800 },
+    { item: 6, nombre: "Jabón natural", precio: 300 }
 ];
 
 for (const iterator of Productos) {
-    listaProductos = listaProductos + iterator.item + iterator.nombre + " - " + iterator.precio + "\n";
+    listaProductos += `${iterator.item}. ${iterator.nombre} - $${iterator.precio}\n`;;
 }
-console.log(Productos);
+
+// console.log(Productos);
 while (salir === false) {
+    let item = [];
+    carrito = [];
     alert("Hola elegí tu producto para agregar al carrito de compras.\nPresioná ACEPTAR para continuar.");
-    let filtro = prompt("¿Querés aplicar algún filtro para los precios?\n\nIngresá s/n").toLocaleLowerCase();
+    let filtro = prompt("¿Querés aplicar algún filtro para los precios?\n\nIngresá S/N").toLocaleLowerCase();
     if (filtro === "s") {
         opcionFiltro = prompt("Presione 8 para filtrar por precio menor." + "\nPresione 9 para filtrar por precio mayor.");
         if (opcionFiltro == 8) {
@@ -63,11 +68,15 @@ while (salir === false) {
         break;
     }
 
-    for (let i = 0; i < cantProductos; i++) {
+    for (let i = 0; i < 100; i++) {
         producto[i] = ingresoProductos(i + 1, listaProductos);
         if (producto[i] != "0") {
             if (parseInt(producto[i]) < 7) {
                 carrito.push(Productos[producto[i] - 1]);
+                item = `${carrito[i].item}. ${carrito[i].nombre} - $${carrito[i].precio}\n`;
+                let li=document.createElement("li");
+                li.innerHTML = item;
+                carritoDom.appendChild(li);
             } else {
                 alert("Opción incorrecta");
                 break;
@@ -86,6 +95,9 @@ while (salir === false) {
 
     if (total != 0) {
         alert("El total de la compra es: $" + total + "\n\n¡Muchas gracias por tu compra!");
+        let cartelTotal = document.createElement("h3");
+        cartelTotal.innerHTML = `El total de la compra es $${total}`;
+        mainDom.append(cartelTotal);
     } else {
         alert("Esperamos que la próxima nos elijas...")
     }
