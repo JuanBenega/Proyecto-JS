@@ -41,7 +41,7 @@ footer {
   box-shadow: 10px 11px 12px -8px rgba(0, 0, 0, 0.36);
 }
 
-.turno div h1, .masajes div div div div div h2, .masajes div h1, .main-bien-entre div div div h2, .main-bien-entre div h1, .nosotros div div div h2, .nosotros div div h1 {
+.productos h1, .turno div h1, .masajes div div div div div h2, .masajes div h1, .main-bien-entre div div div h2, .main-bien-entre div h1, .nosotros div div div h2, .nosotros div div h1 {
   text-align: center;
   font-weight: bold;
 }
@@ -286,6 +286,14 @@ footer nav div div div ul li a:hover {
     font-size: 1rem;
     padding: 10px;
   }
+}
+
+.productos div {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+.productos h1 {
+  padding: 50px 0px;
 }
 
 /*# sourceMappingURL=style.css.map */

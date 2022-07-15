@@ -1,0 +1,11 @@
+.productos {
+    div {
+        font-family: $fuente;
+        font-size: $size-fuente-header;
+    }
+
+    h1 {
+        @extend %texto-titulos;
+        padding: $pad-h1;
+    }
+}
