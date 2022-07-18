@@ -86,6 +86,7 @@
             <h1>Bienvenido a nuestro shop, esperamos que disfrutes tu compra.</h1>
             <div class="row">
                 <div class="col-md-6"></div>
+                <!-- login de usuario -->
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-5">
@@ -100,10 +101,13 @@
                                 Ingresar
                             </button>
                         </div>
+                        <div class="col-md-12">
+                            <h4 id="errorLogin"></h4>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <!-- listado de productos -->
             <div class="row">
                 <div class="row">
                     <div class="col-md-3">
@@ -140,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-3">
                         <div class="card">
                             <img src="../media/images/shampoo solido.jpg" class="card-img-top" alt="...">
@@ -167,7 +171,7 @@
                         <div class="card">
                             <img src="../media/images/shampoo solido.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Jabó natural</h5>
+                                <h5 class="card-title">Jabón natural</h5>
                                 <p class="card-text">Jabón natural</p>
                                 <p class="card-text">$300</p>
                                 <a href="#" class="btn btn-primary" id="prod6">Comprar</a>
@@ -209,19 +213,20 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
-
+        <!-- botón de compra -->
         <button type="button" class="btn btn-success" id="btnCompra">
             Finalizar Compra
         </button>
 
-
+        <!-- impresión de carrito de compras -->
         <h2>Carrito de compras</h2>
-        <div class="carritoDom">
-            <ul></ul><!-- Contenido dinamico del carrito -->
+        <div>
+            <ul class="carritoDom"></ul><!-- Contenido dinamico del carrito -->
         </div>
+        <!-- suma de la compra y saludo final -->
         <h3 id="cartelCompra"></h3>
 
 
