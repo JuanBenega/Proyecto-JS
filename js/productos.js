@@ -40,11 +40,9 @@ class carritoProd {
 
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
-    console.log(carrito);
     let transito, prodExiste=false;
     if (carrito.length == 0) {
         // verifico si el carrito está vacío
-        alert("producto nuevo en carrito");
         transito = new carritoProd(1, prod.nombre, prod.precio);
         carrito.push(transito);
     } else {
@@ -54,18 +52,15 @@ function cargarCarrito(prod) {
                 iterator.cant++;
                 iterator.total += prod.precio;
                 prodExiste=true;
-                alert("producto existente en carrito");
             } 
         }
         // si el producto no está en el carrito lo agrego
         if (prodExiste == false){
             transito = new carritoProd(1, prod.nombre, prod.precio);
             carrito.push(transito);
-            alert("producto nuevo en carrito");
         }
     }
-
-
+    // imprimo el carrito en el DOM
     impCarrito();
     // agrego el producto al carrito en LS
     for (const iterator of carrito) {
@@ -81,7 +76,7 @@ function impCarrito() {
 
     // Imprimo el carrito en el DOM
     for (const iterator of carrito) {
-        item = `${iterator.cant}. ${iterator.nombre} $${iterator.total}`;
+        item = `${iterator.cant} ${iterator.nombre} $${iterator.total}`;
         let li = document.createElement("li");
         li.innerHTML = item;
         carritoDom.appendChild(li);

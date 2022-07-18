@@ -20,7 +20,7 @@ footer {
   align-items: center;
 }
 
-.turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
+#productos div button, .turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
   background-color: #67b967;
   border-radius: 10px;
   color: lightgray;
@@ -28,7 +28,7 @@ footer {
   transition: all 0.5s;
 }
 
-.turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
+#productos div button:hover, .turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
   background-color: lightgray;
   color: white;
   box-shadow: none;
@@ -41,7 +41,7 @@ footer {
   box-shadow: 10px 11px 12px -8px rgba(0, 0, 0, 0.36);
 }
 
-.productos h1, .turno div h1, .masajes div div div div div h2, .masajes div h1, .main-bien-entre div div div h2, .main-bien-entre div h1, .nosotros div div div h2, .nosotros div div h1 {
+#productos div h1, .turno div h1, .masajes div div div div div h2, .masajes div h1, .main-bien-entre div div div h2, .main-bien-entre div h1, .nosotros div div div h2, .nosotros div div h1 {
   text-align: center;
   font-weight: bold;
 }
@@ -288,12 +288,34 @@ footer nav div div div ul li a:hover {
   }
 }
 
-.productos div {
+#productos {
   font-family: "Poppins", sans-serif;
   font-size: 1.3rem;
 }
-.productos h1 {
+#productos div h1 {
   padding: 50px 0px;
+}
+#productos div div #btnLogin {
+  font-size: 1.3rem;
+}
+#productos div div #btnCompra {
+  font-size: 1.3rem;
+}
+#productos div #carrito div h2 {
+  font-weight: bold;
+  justify-self: center;
+}
+#productos div #carrito div div ul {
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 1px;
+}
+#productos div #carrito div div ul li {
+  list-style: none;
+}
+#productos div button:hover {
+  transform: scale(110%);
 }
 
 /*# sourceMappingURL=style.css.map */
