@@ -1,11 +1,12 @@
-// Eventos del DOM
-const compraProd1 = document.getElementById("prod1"), compraProd2 = document.querySelector("#prod2"),
+// Eventos del DOM **************************************************************************************
+const contBotonProd1=document.querySelector("#contBotonProd1"), compraProd1 = document.getElementById("prod1"), compraProd2 = document.querySelector("#prod2"),
     compraProd3 = document.querySelector("#prod3"), compraProd4 = document.querySelector("#prod4"),
     compraProd5 = document.querySelector("#prod5"), compraProd6 = document.querySelector("#prod6"),
     compraProd7 = document.querySelector("#prod7"), compraProd8 = document.querySelector("#prod8"),
     compraProd9 = document.querySelector("#prod9"), finCompra = document.querySelector("#btnCompra");
 
-const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra");
+const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra"),
+    saludoCompra = document.querySelector("#saludoCompra");
 const inputEmail = document.querySelector("#input-email"), inputPass = document.querySelector("#input-pass"),
     btnLogin = document.querySelector("#btnLogin"), errorLogin = document.querySelector("#errorLogin");
 
@@ -40,9 +41,10 @@ class carritoProd {
 
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
-    let transito, prodExiste=false;
+    let transito, prodExiste = false;
     if (carrito.length == 0) {
         // verifico si el carrito está vacío
+        borrarCarritoDom();
         transito = new carritoProd(1, prod.nombre, prod.precio);
         carrito.push(transito);
     } else {
@@ -51,11 +53,11 @@ function cargarCarrito(prod) {
             if (iterator.nombre == prod.nombre) {
                 iterator.cant++;
                 iterator.total += prod.precio;
-                prodExiste=true;
-            } 
+                prodExiste = true;
+            }
         }
         // si el producto no está en el carrito lo agrego
-        if (prodExiste == false){
+        if (prodExiste == false) {
             transito = new carritoProd(1, prod.nombre, prod.precio);
             carrito.push(transito);
         }
@@ -69,11 +71,7 @@ function cargarCarrito(prod) {
 }
 
 function impCarrito() {
-    // Borro todos los elementos del carrito hasta que esté vacío 
-    while (carritoDom.firstChild) {
-        carritoDom.removeChild(carritoDom.firstChild);
-    }
-
+    borrarCarritoDom();
     // Imprimo el carrito en el DOM
     for (const iterator of carrito) {
         item = `${iterator.cant} ${iterator.nombre} $${iterator.total}`;
@@ -87,7 +85,6 @@ function sumaCompra() {
     for (const iterator of carrito) {
         totalCompra += iterator.total;
     }
-    cartelCompra.innerText = `El total de la compra es $${totalCompra}.\n\n¡¡¡Muchas gracias por elegirnos!!!`;
 }
 
 function guardarLS(categoria, objeto) {
@@ -107,18 +104,24 @@ function leerCarritoLS() {
     return prodCarrito;
 }
 
-
-
+function borrarCarritoDom() {
+    // Borro todos los elementos del carrito hasta que esté vacío 
+    while (carritoDom.firstChild) {
+        carritoDom.removeChild(carritoDom.firstChild);
+    }
+}
 
 
 // Eventos **************************************************************************************************
 
 // Deshabilito los botones de compra si no hay un usuario logeado
 /*window.addEventListener("load", () => {
-    console.log(leerLS("user"));
-    if (!leerLS("user")) {
+    
+    if (leerLS("user")==null) {
         // btnDissable.value = "disable";
-        compraProd1.innerHTML = " disable";
+        console.log(leerLS("user"));
+        //compraProd1.setAttribute("aria-disabled", "true");
+        contBotonProd1.innerHTML= `<button type="button" class="btn" disable>Comprar</button>`;
     } 
 })*/
 
@@ -156,6 +159,11 @@ compraProd9.addEventListener("click", () => {
 finCompra.addEventListener("click", () => {
     sumaCompra();
     localStorage.removeItem("prod");
+    carrito = [];
+    cartelCompra.innerText = `El total de la compra es $${totalCompra}.`;
+    saludoCompra.innerText = "¡¡¡Muchas gracias por elegirnos!!!";
+    totalCompra=0;
+
 })
 
 // Login de usuario

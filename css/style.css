@@ -310,8 +310,6 @@ footer nav div div div ul li a:hover {
   border-color: black;
   border-radius: 5px;
   border-width: 1px;
-}
-#productos div #carrito div div ul li {
   list-style: none;
 }
 #productos div button:hover {

@@ -117,7 +117,9 @@
                                 <h5 class="card-title">Shampoo Sólido</h5>
                                 <p class="card-text">Shampoo sólido de avena</p>
                                 <p class="card-text">$500</p>
-                                <button type="button" class="btn" id="prod1">Comprar</button>
+                                <div id="contBotonProd1">
+                                    <button type="button" class="btn" id="prod1">Comprar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,14 +224,15 @@
                 </button>
             </div>
             <div class="row my-3 d-flex justify-content-center" id="carrito">
-                <div class="col-md-6" >
+                <div class="col-md-6">
                     <!-- impresión de carrito de compras -->
                     <h2>Carrito de compras</h2>
                     <div>
                         <ul class="carritoDom"></ul><!-- Contenido dinamico del carrito -->
                     </div>
                     <!-- suma de la compra y saludo final -->
-                    <h3 id="cartelCompra"></h3>
+                    <h3 class="my-3 d-flex justify-content-end" id="cartelCompra"></h3>
+                    <h2 class="my-4 d-flex justify-content-center" id="saludoCompra"></h2>
                 </div>
             </div>
         </div>
