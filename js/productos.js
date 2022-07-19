@@ -114,18 +114,6 @@ function borrarCarritoDom() {
 
 // Eventos **************************************************************************************************
 
-// Deshabilito los botones de compra si no hay un usuario logeado
-/*window.addEventListener("load", () => {
-    
-    if (leerLS("user")==null) {
-        // btnDissable.value = "disable";
-        console.log(leerLS("user"));
-        //compraProd1.setAttribute("aria-disabled", "true");
-        contBotonProd1.innerHTML= `<button type="button" class="btn" disable>Comprar</button>`;
-    } 
-})*/
-
-
 // Eventos de selección de productos
 compraProd1.addEventListener("click", () => {
     cargarCarrito(Productos[0]);
