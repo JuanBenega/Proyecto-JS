@@ -1,5 +1,5 @@
 // Eventos del DOM **************************************************************************************
-const contBotonProd1=document.querySelector("#contBotonProd1"), compraProd1 = document.getElementById("prod1"), compraProd2 = document.querySelector("#prod2"),
+const contBotonProd1 = document.querySelector("#contBotonProd1"), compraProd1 = document.getElementById("prod1"), compraProd2 = document.querySelector("#prod2"),
     compraProd3 = document.querySelector("#prod3"), compraProd4 = document.querySelector("#prod4"),
     compraProd5 = document.querySelector("#prod5"), compraProd6 = document.querySelector("#prod6"),
     compraProd7 = document.querySelector("#prod7"), compraProd8 = document.querySelector("#prod8"),
@@ -13,7 +13,7 @@ const inputEmail = document.querySelector("#input-email"), inputPass = document.
 
 // Variables ********************************************************************************************
 let btnDissable = document.createAttribute("atributo");
-let carrito = [];
+let carrito = leerCarritoLS() || [];
 let totalCompra = 0;
 let carritoLS, mailLS, passLS;
 
@@ -42,32 +42,25 @@ class carritoProd {
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
     let transito, prodExiste = false;
-    if (carrito.length == 0) {
+    const { nombre, precio } = prod;
+    for (const iterator of carrito) {
+        // verifico si el producto elegido ya está en el carrito
+        if (iterator.nombre == nombre) {
+            iterator.cant++;
+            iterator.total += precio;
+            prodExiste = true;
+        }
+    }
+    if (carrito.length == 0 || prodExiste == false) {
         // verifico si el carrito está vacío
-        borrarCarritoDom();
-        transito = new carritoProd(1, prod.nombre, prod.precio);
+        transito = new carritoProd(1, nombre, precio);
         carrito.push(transito);
-    } else {
-        for (const iterator of carrito) {
-            // verifico si el producto elegido ya está en el carrito
-            if (iterator.nombre == prod.nombre) {
-                iterator.cant++;
-                iterator.total += prod.precio;
-                prodExiste = true;
-            }
-        }
-        // si el producto no está en el carrito lo agrego
-        if (prodExiste == false) {
-            transito = new carritoProd(1, prod.nombre, prod.precio);
-            carrito.push(transito);
-        }
     }
     // imprimo el carrito en el DOM
     impCarrito();
     // agrego el producto al carrito en LS
-    for (const iterator of carrito) {
-        guardarLS("prod", carrito);
-    }
+    guardarLS("prod", carrito);
+    modifBoton(prod);
 }
 
 function impCarrito() {
@@ -101,6 +94,8 @@ function leerCarritoLS() {
     if (prodCarrito == null) {
         prodCarrito = [];
     }
+
+    //prodCarrito = prodCarrito == "null" || [];
     return prodCarrito;
 }
 
@@ -111,19 +106,24 @@ function borrarCarritoDom() {
     }
 }
 
+function modifBoton(elemento) {
+
+}
 
 // Eventos **************************************************************************************************
 
 // Deshabilito los botones de compra si no hay un usuario logeado
-/*window.addEventListener("load", () => {
-    
-    if (leerLS("user")==null) {
+window.addEventListener("load", () => {
+    leerLS("user") === null || impCarrito();      
+    /*if (leerLS("user") === null) {
         // btnDissable.value = "disable";
         console.log(leerLS("user"));
         //compraProd1.setAttribute("aria-disabled", "true");
-        contBotonProd1.innerHTML= `<button type="button" class="btn" disable>Comprar</button>`;
-    } 
-})*/
+        //contBotonProd1.innerHTML= `<button type="button" class="btn" disable>Comprar</button>`;
+    } else {
+        impCarrito();
+    }*/
+})
 
 
 // Eventos de selección de productos
@@ -162,7 +162,7 @@ finCompra.addEventListener("click", () => {
     carrito = [];
     cartelCompra.innerText = `El total de la compra es $${totalCompra}.`;
     saludoCompra.innerText = "¡¡¡Muchas gracias por elegirnos!!!";
-    totalCompra=0;
+    totalCompra = 0;
 
 })
 
@@ -172,7 +172,6 @@ btnLogin.addEventListener("click", (e) => {
     let user = { usuario: inputEmail.value, pass: inputPass.value }
     if (user.usuario && user.pass) {
         guardarLS("user", user);
-        carrito = leerCarritoLS();
         impCarrito();
     } else {
         errorLogin.innerText = `Los campos no pueden estar vacíos`;
