@@ -1,18 +1,19 @@
+// import swal from 'sweetalert';
+
+
 // Eventos del DOM **************************************************************************************
-const contBotonProd1 = document.querySelector("#contBotonProd1"), compraProd1 = document.getElementById("prod1"), compraProd2 = document.querySelector("#prod2"),
-    compraProd3 = document.querySelector("#prod3"), compraProd4 = document.querySelector("#prod4"),
-    compraProd5 = document.querySelector("#prod5"), compraProd6 = document.querySelector("#prod6"),
-    compraProd7 = document.querySelector("#prod7"), compraProd8 = document.querySelector("#prod8"),
-    compraProd9 = document.querySelector("#prod9"), finCompra = document.querySelector("#btnCompra");
+const btnProd = [document.getElementById("prod1"), document.querySelector("#prod2"), document.querySelector("#prod3"), btnProd4 = document.querySelector("#prod4"),
+document.querySelector("#prod5"), document.querySelector("#prod6"), document.querySelector("#prod7"), document.querySelector("#prod8"),
+document.querySelector("#prod9")], finCompra = document.querySelector("#btnCompra");
 
 const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra"),
     saludoCompra = document.querySelector("#saludoCompra");
 const inputEmail = document.querySelector("#input-email"), inputPass = document.querySelector("#input-pass"),
-    btnLogin = document.querySelector("#btnLogin"), errorLogin = document.querySelector("#errorLogin");
+    btnLogin = document.querySelector("#btnLogin"), errorLogin = document.querySelector("#errorLogin")
+msgLogin = document.querySelector("#msgLogin");
 
 
 // Variables ********************************************************************************************
-let btnDissable = document.createAttribute("atributo");
 let carrito = leerCarritoLS() || [];
 let totalCompra = 0;
 let carritoLS, mailLS, passLS;
@@ -37,10 +38,27 @@ class carritoProd {
         this.total = total;
     }
 }
+
 // Funciones *********************************************************************************************
 
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
+    Toastify({
+        text:  `${prod.nombre} agregado`,
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+            background: "#aa79b3",
+            border: "10px",
+            color: "lightgray",
+            fonttype: 'Poppins, sans-serif',
+        },
+        offset: {
+            y: 100
+        },
+    }).showToast();
     let transito, prodExiste = false;
     const { nombre, precio } = prod;
     for (const iterator of carrito) {
@@ -60,7 +78,7 @@ function cargarCarrito(prod) {
     impCarrito();
     // agrego el producto al carrito en LS
     guardarLS("prod", carrito);
-    modifBoton(prod);
+    //modifBoton(prod);
 }
 
 function impCarrito() {
@@ -71,6 +89,16 @@ function impCarrito() {
         let li = document.createElement("li");
         li.innerHTML = item;
         carritoDom.appendChild(li);
+    }
+}
+
+function verifCarrito() {
+    if (!carrito[0]) {
+        let li = document.createElement("li");
+        li.innerHTML = "Por favor elija un producto";
+        carritoDom.appendChild(li);
+    } else {
+        impCarrito();
     }
 }
 
@@ -94,9 +122,12 @@ function leerCarritoLS() {
     if (prodCarrito == null) {
         prodCarrito = [];
     }
-
-    //prodCarrito = prodCarrito == "null" || [];
     return prodCarrito;
+}
+
+function leerUser() {
+    let usuario = leerLS("user");
+    return usuario;
 }
 
 function borrarCarritoDom() {
@@ -106,63 +137,78 @@ function borrarCarritoDom() {
     }
 }
 
-function modifBoton(elemento) {
-
+function modifBtn(attr) {
+    for (const boton of btnProd) {
+        boton.className = attr;
+    }
 }
 
 // Eventos **************************************************************************************************
 
 // Deshabilito los botones de compra si no hay un usuario logeado
 window.addEventListener("load", () => {
-    leerLS("user") === null || impCarrito();      
-    /*if (leerLS("user") === null) {
-        // btnDissable.value = "disable";
-        console.log(leerLS("user"));
-        //compraProd1.setAttribute("aria-disabled", "true");
-        //contBotonProd1.innerHTML= `<button type="button" class="btn" disable>Comprar</button>`;
+    let usuarioLS = leerLS("user")
+    if (usuarioLS === null) {
+        modifBtn("btn disabled");
+        msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
     } else {
-        impCarrito();
-    }*/
+        verifCarrito();
+        msgLogin.innerText = `Bienvenido ${usuarioLS.usuario}`;
+    }
 })
 
 
 // Eventos de selección de productos
-compraProd1.addEventListener("click", () => {
+btnProd[0].addEventListener("click", () => {
     cargarCarrito(Productos[0]);
 })
-compraProd2.addEventListener("click", () => {
+btnProd[1].addEventListener("click", () => {
     cargarCarrito(Productos[1]);
 })
-compraProd3.addEventListener("click", () => {
+btnProd[2].addEventListener("click", () => {
     cargarCarrito(Productos[2]);
 })
-compraProd4.addEventListener("click", () => {
+btnProd[3].addEventListener("click", () => {
     cargarCarrito(Productos[3]);
 })
-compraProd5.addEventListener("click", () => {
+btnProd[4].addEventListener("click", () => {
     cargarCarrito(Productos[4]);
 })
-compraProd6.addEventListener("click", () => {
+btnProd[5].addEventListener("click", () => {
     cargarCarrito(Productos[5]);
 })
-compraProd7.addEventListener("click", () => {
+btnProd[6].addEventListener("click", () => {
     cargarCarrito(Productos[6]);
 })
-compraProd8.addEventListener("click", () => {
+btnProd[7].addEventListener("click", () => {
     cargarCarrito(Productos[7]);
 })
-compraProd9.addEventListener("click", () => {
+btnProd[8].addEventListener("click", () => {
     cargarCarrito(Productos[8]);
 })
 
 // Finalización de compra
 finCompra.addEventListener("click", () => {
     sumaCompra();
-    localStorage.removeItem("prod");
-    carrito = [];
-    cartelCompra.innerText = `El total de la compra es $${totalCompra}.`;
-    saludoCompra.innerText = "¡¡¡Muchas gracias por elegirnos!!!";
-    totalCompra = 0;
+    if (totalCompra != 0) {
+        localStorage.removeItem("prod");
+        carrito = [];
+        swal({
+            title: "¡Muchas gracias por elegirnos!",
+            text: `El total de la compra es $${totalCompra}.`,
+            icon: "success",
+            button: "Salir",
+        });
+        borrarCarritoDom();
+        totalCompra = 0;
+    } else {
+        swal({
+            title: "El carrito está vacío",
+            text: "Por favor eliga un producto a comprar...",
+            icon: "warning",
+            button: "Salir",
+        });
+    }
 
 })
 
@@ -172,7 +218,12 @@ btnLogin.addEventListener("click", (e) => {
     let user = { usuario: inputEmail.value, pass: inputPass.value }
     if (user.usuario && user.pass) {
         guardarLS("user", user);
-        impCarrito();
+        verifCarrito();
+        msgLogin.innerText = `Bienvenido ${user.usuario}`;
+        errorLogin.innerText = ``;
+        modifBtn("btn");
+        inputEmail.value = "";
+        inputPass.value = "";
     } else {
         errorLogin.innerText = `Los campos no pueden estar vacíos`;
     }

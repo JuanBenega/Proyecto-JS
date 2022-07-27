@@ -21,10 +21,10 @@
         }
 
         #carrito {
-            
+
 
             div {
-            
+
                 h2 {
                     font-weight: bold;
                     justify-self: center;
@@ -40,6 +40,7 @@
                     }
                 }
             }
+
         }
 
         button {
@@ -55,3 +56,24 @@
 
 
 }
+
+// Estilos Sweetalert
+.swal-button {
+    @extend %boton-menu;
+    font-family: $fuente;
+    font-size: $size-fuente-btn-compra;
+    padding: 5px 19px;
+
+    &:hover {
+        @extend %boton-menu-hover;
+        transform: scale(110%);
+    }
+  }
+
+  .swal-modal {
+    font-family: $fuente;
+  }
+
+  .swal-text {
+    font-size: $size-fuente-swal;
+  }
