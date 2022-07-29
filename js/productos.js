@@ -4,7 +4,7 @@
 // Eventos del DOM **************************************************************************************
 const btnProd = [document.getElementById("prod1"), document.querySelector("#prod2"), document.querySelector("#prod3"), btnProd4 = document.querySelector("#prod4"),
 document.querySelector("#prod5"), document.querySelector("#prod6"), document.querySelector("#prod7"), document.querySelector("#prod8"),
-document.querySelector("#prod9")], finCompra = document.querySelector("#btnCompra");
+document.querySelector("#prod9")], finCompra = document.querySelector("#btnCompra"), cardsDom = document.querySelector("#cardsDom");
 
 const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra"),
     saludoCompra = document.querySelector("#saludoCompra");
@@ -18,18 +18,41 @@ let carrito = leerCarritoLS() || [];
 let totalCompra = 0;
 let carritoLS, mailLS, passLS;
 
+
 // Objetos **********************************************************************************************
-const Productos = [
-    { item: 1, nombre: "Shampoo sólido", descripcion: "Shampoo sólido", precio: 500 },
-    { item: 2, nombre: "Crema facial", descripcion: "Crema facial", precio: 750 },
-    { item: 3, nombre: "Crema corporal", descripcion: "Crema corporal", precio: 1200 },
-    { item: 4, nombre: "Shampoo líquido", descripcion: "Shampoo líquido", precio: 500 },
-    { item: 5, nombre: "Crema de anjuague", descripcion: "Crema de anjuague", precio: 750 },
-    { item: 6, nombre: "Jabón natural", descripcion: "Jabón natural", precio: 800 },
-    { item: 7, nombre: "Desodorante", descripcion: "Desodorante", precio: 1050 },
-    { item: 8, nombre: "Dentrífico", descripcion: "Dentrífico", precio: 950 },
-    { item: 9, nombre: "Crema de enjuague sólida", descripcion: "Crema de enjuague sólida", precio: 1150 }
+const productos = [
+    { item: 1, img: '../media/images/shampoosolido.jpg', nombre: "Shampoo sólido", descripcion: "Shampoo sólido", precio: 500 },
+    { item: 2, img: '../media/images/shampoosolido.jpg', nombre: "Crema facial", descripcion: "Crema facial", precio: 750 },
+    { item: 3, img: '../media/images/shampoosolido.jpg', nombre: "Crema corporal", descripcion: "Crema corporal", precio: 1200 },
+    { item: 4, img: '../media/images/shampoosolido.jpg', nombre: "Shampoo líquido", descripcion: "Shampoo líquido", precio: 500 },
+    { item: 5, img: '../media/images/shampoosolido.jpg', nombre: "Crema de anjuague", descripcion: "Crema de anjuague", precio: 750 },
+    { item: 6, img: '../media/images/shampoosolido.jpg', nombre: "Jabón natural", descripcion: "Jabón natural", precio: 800 },
+    { item: 7, img: '../media/images/shampoosolido.jpg', nombre: "Desodorante", descripcion: "Desodorante", precio: 1050 },
+    { item: 8, img: '../media/images/shampoosolido.jpg', nombre: "Dentrífico", descripcion: "Dentrífico", precio: 950 },
+    { item: 9, img: '../media/images/shampoosolido.jpg', nombre: "Crema de enjuague sólida", descripcion: "Crema de enjuague sólida", precio: 1150 }
 ];
+
+let html = productos.map((producto) => {
+    return (
+        `
+        <div class="col">
+            <div class="card text-end">
+                <img src=${ producto.img} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-start">${ producto.nombre }</h5>
+                    <p class="card-text text-start">${ producto.descripcion}</p>
+                    <p class="card-text">$${ producto.precio}</p>
+                    <button type="button" class="btn" id="prod1">Comprar</button>
+                </div>
+            </div>
+        </div>
+        `
+    );
+});
+console.log(html);
+for (const iterator of html) {
+    cardsDom.innerHTML += iterator;
+}
 
 class carritoProd {
     constructor(cant, nombre, total) {
@@ -148,7 +171,7 @@ function modifBtn(attr) {
 window.addEventListener("load", () => {
     let usuarioLS = leerLS("user")
     if (usuarioLS === null) {
-        modifBtn("btn disabled");
+        //modifBtn("btn disabled");
         msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
     } else {
         verifCarrito();
@@ -158,33 +181,36 @@ window.addEventListener("load", () => {
 
 
 // Eventos de selección de productos
-btnProd[0].addEventListener("click", () => {
-    cargarCarrito(Productos[0]);
+/*btnProd[0].addEventListener("click", () => {
+    cargarCarrito(productos[0]);
 })
 btnProd[1].addEventListener("click", () => {
-    cargarCarrito(Productos[1]);
+    cargarCarrito(productos[1]);
 })
 btnProd[2].addEventListener("click", () => {
-    cargarCarrito(Productos[2]);
+    cargarCarrito(productos[2]);
 })
 btnProd[3].addEventListener("click", () => {
-    cargarCarrito(Productos[3]);
+    cargarCarrito(productos[3]);
 })
 btnProd[4].addEventListener("click", () => {
-    cargarCarrito(Productos[4]);
+    cargarCarrito(productos[4]);
 })
 btnProd[5].addEventListener("click", () => {
-    cargarCarrito(Productos[5]);
+    cargarCarrito(productos[5]);
 })
 btnProd[6].addEventListener("click", () => {
-    cargarCarrito(Productos[6]);
+    cargarCarrito(productos[6]);
 })
 btnProd[7].addEventListener("click", () => {
-    cargarCarrito(Productos[7]);
+    cargarCarrito(productos[7]);
 })
 btnProd[8].addEventListener("click", () => {
-    cargarCarrito(Productos[8]);
+    cargarCarrito(productos[8]);
 })
+*/
+
+
 
 // Finalización de compra
 finCompra.addEventListener("click", () => {
