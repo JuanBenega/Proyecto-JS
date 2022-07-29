@@ -1,4 +1,4 @@
-// import swal from 'sweetalert';
+//import swal from 'sweetalert';
 
 
 // Eventos del DOM **************************************************************************************
@@ -44,7 +44,7 @@ class carritoProd {
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
     Toastify({
-        text:  `${prod.nombre} agregado`,
+        text: `${prod.nombre} agregado`,
         duration: 2000,
         gravity: "top",
         position: "center",
@@ -53,7 +53,6 @@ function cargarCarrito(prod) {
             background: "#aa79b3",
             border: "10px",
             color: "lightgray",
-            fonttype: 'Poppins, sans-serif',
         },
         offset: {
             y: 100
