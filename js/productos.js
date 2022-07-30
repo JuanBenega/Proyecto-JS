@@ -1,10 +1,8 @@
 //import swal from 'sweetalert';
 
 
-// Eventos del DOM **************************************************************************************
-const btnProd = [document.getElementById("prod1"), document.querySelector("#prod2"), document.querySelector("#prod3"), btnProd4 = document.querySelector("#prod4"),
-document.querySelector("#prod5"), document.querySelector("#prod6"), document.querySelector("#prod7"), document.querySelector("#prod8"),
-document.querySelector("#prod9")], finCompra = document.querySelector("#btnCompra"), cardsDom = document.querySelector("#cardsDom");
+// Elementos del DOM **************************************************************************************
+const btnProd = [], btnCompra = document.querySelector("#btnCompra"), cardsDom = document.querySelector("#cardsDom");
 
 const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra"),
     saludoCompra = document.querySelector("#saludoCompra");
@@ -32,27 +30,6 @@ const productos = [
     { item: 9, img: '../media/images/shampoosolido.jpg', nombre: "Crema de enjuague sólida", descripcion: "Crema de enjuague sólida", precio: 1150 }
 ];
 
-let html = productos.map((producto) => {
-    return (
-        `
-        <div class="col">
-            <div class="card text-end">
-                <img src=${ producto.img} class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">${ producto.nombre }</h5>
-                    <p class="card-text text-start">${ producto.descripcion}</p>
-                    <p class="card-text">$${ producto.precio}</p>
-                    <button type="button" class="btn" id="prod1">Comprar</button>
-                </div>
-            </div>
-        </div>
-        `
-    );
-});
-console.log(html);
-for (const iterator of html) {
-    cardsDom.innerHTML += iterator;
-}
 
 class carritoProd {
     constructor(cant, nombre, total) {
@@ -66,15 +43,15 @@ class carritoProd {
 
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
+    let prodCarrito = productos.find ( p => p.item === prod);
     Toastify({
-        text: `${prod.nombre} agregado`,
+        text: `${prodCarrito.nombre} agregado`,
         duration: 2000,
         gravity: "top",
         position: "center",
         stopOnFocus: true,
         style: {
             background: "#aa79b3",
-            border: "10px",
             color: "lightgray",
         },
         offset: {
@@ -82,17 +59,17 @@ function cargarCarrito(prod) {
         },
     }).showToast();
     let transito, prodExiste = false;
-    const { nombre, precio } = prod;
+    const { nombre, precio } = prodCarrito;
+    // verifico si el producto elegido ya está en el carrito
     for (const iterator of carrito) {
-        // verifico si el producto elegido ya está en el carrito
         if (iterator.nombre == nombre) {
             iterator.cant++;
             iterator.total += precio;
             prodExiste = true;
         }
     }
+    // verifico si el carrito está vacío
     if (carrito.length == 0 || prodExiste == false) {
-        // verifico si el carrito está vacío
         transito = new carritoProd(1, nombre, precio);
         carrito.push(transito);
     }
@@ -165,13 +142,41 @@ function modifBtn(attr) {
     }
 }
 
+// Imprimo los productos en el HTML
+let html = productos.map((producto) => {
+    return (
+        `
+        <div class="col">
+            <div class="card text-end border-dark h-100 mx-5">
+                <img src=${producto.img} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-start">${producto.nombre}</h5>
+                    <p class="card-text text-start">${producto.descripcion}</p>
+                    <p class="card-text">$${producto.precio}</p>
+                    <button type="button" class="btn" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        `
+    );
+});
+for (const iterator of html) {
+    cardsDom.innerHTML += iterator;
+}
+
+// Asigno cada elemento del DOM boton de compra de los productos
+productos.forEach(element => {
+    btnProd.push (document.querySelector(`#btnProd${element.item}`));
+});
+
 // Eventos **************************************************************************************************
 
 // Deshabilito los botones de compra si no hay un usuario logeado
 window.addEventListener("load", () => {
     let usuarioLS = leerLS("user")
     if (usuarioLS === null) {
-        //modifBtn("btn disabled");
+        console.log(btnProd);
+        modifBtn("btn disabled");
         msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
     } else {
         verifCarrito();
@@ -179,41 +184,8 @@ window.addEventListener("load", () => {
     }
 })
 
-
-// Eventos de selección de productos
-/*btnProd[0].addEventListener("click", () => {
-    cargarCarrito(productos[0]);
-})
-btnProd[1].addEventListener("click", () => {
-    cargarCarrito(productos[1]);
-})
-btnProd[2].addEventListener("click", () => {
-    cargarCarrito(productos[2]);
-})
-btnProd[3].addEventListener("click", () => {
-    cargarCarrito(productos[3]);
-})
-btnProd[4].addEventListener("click", () => {
-    cargarCarrito(productos[4]);
-})
-btnProd[5].addEventListener("click", () => {
-    cargarCarrito(productos[5]);
-})
-btnProd[6].addEventListener("click", () => {
-    cargarCarrito(productos[6]);
-})
-btnProd[7].addEventListener("click", () => {
-    cargarCarrito(productos[7]);
-})
-btnProd[8].addEventListener("click", () => {
-    cargarCarrito(productos[8]);
-})
-*/
-
-
-
 // Finalización de compra
-finCompra.addEventListener("click", () => {
+btnCompra.addEventListener("click", () => {
     sumaCompra();
     if (totalCompra != 0) {
         localStorage.removeItem("prod");
