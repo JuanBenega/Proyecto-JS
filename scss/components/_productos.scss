@@ -52,6 +52,15 @@
             }
         }
 
+        #cardsDom {
+            h5 {
+                font-weight: bold;
+            }
+            p {
+                font-size: $size-fuente-cards;
+            }
+        }
+
     }
 
 

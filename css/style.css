@@ -315,6 +315,12 @@ footer nav div div div ul li a:hover {
 #productos div button:hover {
   transform: scale(110%);
 }
+#productos div #cardsDom h5 {
+  font-weight: bold;
+}
+#productos div #cardsDom p {
+  font-size: 1.1rem;
+}
 
 .swal-button {
   font-family: "Poppins", sans-serif;

@@ -18,18 +18,48 @@ let carritoLS, mailLS, passLS;
 
 
 // Objetos **********************************************************************************************
-const productos = [
-    { item: 1, img: '../media/images/shampoosolido.jpg', nombre: "Shampoo sólido", descripcion: "Shampoo sólido", precio: 500 },
-    { item: 2, img: '../media/images/shampoosolido.jpg', nombre: "Crema facial", descripcion: "Crema facial", precio: 750 },
-    { item: 3, img: '../media/images/shampoosolido.jpg', nombre: "Crema corporal", descripcion: "Crema corporal", precio: 1200 },
-    { item: 4, img: '../media/images/shampoosolido.jpg', nombre: "Shampoo líquido", descripcion: "Shampoo líquido", precio: 500 },
-    { item: 5, img: '../media/images/shampoosolido.jpg', nombre: "Crema de anjuague", descripcion: "Crema de anjuague", precio: 750 },
-    { item: 6, img: '../media/images/shampoosolido.jpg', nombre: "Jabón natural", descripcion: "Jabón natural", precio: 800 },
-    { item: 7, img: '../media/images/shampoosolido.jpg', nombre: "Desodorante", descripcion: "Desodorante", precio: 1050 },
-    { item: 8, img: '../media/images/shampoosolido.jpg', nombre: "Dentrífico", descripcion: "Dentrífico", precio: 950 },
-    { item: 9, img: '../media/images/shampoosolido.jpg', nombre: "Crema de enjuague sólida", descripcion: "Crema de enjuague sólida", precio: 1150 }
-];
+const productos = [];
+/*const leerProd = async () => {
+    const respuesta = await fetch ("../src/data/productos.json");
+    const prods = await respuesta.json();
+for (const item of prods) {
+    productos.push()=prods[item];
+}
+console.log(productos);
+}*/
 
+fetch('../src/data/productos.json')
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.log(error))
+
+//leerProd();
+// Imprimo los productos en el HTML
+let html = productos.map((producto) => {
+    return (
+        `
+        <div class="col">
+            <div class="card d-flex text-end border-dark h-100 mx-5">
+                <img src=${producto.img} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-start">${producto.nombre}</h5>
+                    <p class="card-text text-start">${producto.descripcion}</p>
+                    <h5 class="card-text">$${producto.precio}</h5>
+                    <button type="button" class="btn align-self-end" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        `
+    );
+});
+for (const iterator of html) {
+    cardsDom.innerHTML += iterator;
+}
+
+// Asigno cada elemento del DOM boton de compra de los productos
+productos.forEach(element => {
+    btnProd.push(document.querySelector(`#btnProd${element.item}`));
+});
 
 class carritoProd {
     constructor(cant, nombre, total) {
@@ -43,7 +73,7 @@ class carritoProd {
 
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
-    let prodCarrito = productos.find ( p => p.item === prod);
+    let prodCarrito = productos.find(p => p.item === prod);
     Toastify({
         text: `${prodCarrito.nombre} agregado`,
         duration: 2000,
@@ -77,7 +107,8 @@ function cargarCarrito(prod) {
     impCarrito();
     // agrego el producto al carrito en LS
     guardarLS("prod", carrito);
-    //modifBoton(prod);
+    // Habilito el botón de fin de compra
+    btnCompra.className = "btn me-3";
 }
 
 function impCarrito() {
@@ -136,38 +167,18 @@ function borrarCarritoDom() {
     }
 }
 
-function modifBtn(attr) {
-    for (const boton of btnProd) {
+function modifClass(array, attr) {
+    // Modifico las clases de los elementos del DOM del array
+    for (const boton of array) {
         boton.className = attr;
     }
 }
 
-// Imprimo los productos en el HTML
-let html = productos.map((producto) => {
-    return (
-        `
-        <div class="col">
-            <div class="card text-end border-dark h-100 mx-5">
-                <img src=${producto.img} class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">${producto.nombre}</h5>
-                    <p class="card-text text-start">${producto.descripcion}</p>
-                    <p class="card-text">$${producto.precio}</p>
-                    <button type="button" class="btn" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
-                </div>
-            </div>
-        </div>
-        `
-    );
-});
-for (const iterator of html) {
-    cardsDom.innerHTML += iterator;
+function clearLogin() {
+    // Borro los datos del login de usuario en el DOM
+    inputEmail.value = "";
+    inputPass.value = "";
 }
-
-// Asigno cada elemento del DOM boton de compra de los productos
-productos.forEach(element => {
-    btnProd.push (document.querySelector(`#btnProd${element.item}`));
-});
 
 // Eventos **************************************************************************************************
 
@@ -175,12 +186,13 @@ productos.forEach(element => {
 window.addEventListener("load", () => {
     let usuarioLS = leerLS("user")
     if (usuarioLS === null) {
-        console.log(btnProd);
-        modifBtn("btn disabled");
+        modifClass(btnProd, "btn disabled align-self-end");
+        btnCompra.className = "btn me-3 disabled";
         msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
     } else {
         verifCarrito();
         msgLogin.innerText = `Bienvenido ${usuarioLS.usuario}`;
+        btnLogin.innerText = "Salir";
     }
 })
 
@@ -212,17 +224,24 @@ btnCompra.addEventListener("click", () => {
 // Login de usuario
 btnLogin.addEventListener("click", (e) => {
     e.preventDefault();
-    let user = { usuario: inputEmail.value, pass: inputPass.value }
-    if (user.usuario && user.pass) {
-        guardarLS("user", user);
-        verifCarrito();
-        msgLogin.innerText = `Bienvenido ${user.usuario}`;
-        errorLogin.innerText = ``;
-        modifBtn("btn");
-        inputEmail.value = "";
-        inputPass.value = "";
+    let user = { usuario: inputEmail.value, pass: inputPass.value }, usuarioLS = leerLS("user");
+    if (usuarioLS === null) {
+        if (user.usuario && user.pass) {
+            guardarLS("user", user);
+            verifCarrito();
+            msgLogin.innerText = `Bienvenido ${user.usuario}`;
+            btnLogin.innerText = "Salir";
+            errorLogin.innerText = ``;
+            modifClass(btnProd, "btn align-self-end");
+            clearLogin();
+
+        } else {
+            errorLogin.innerText = `Los campos no pueden estar vacíos`;
+        }
     } else {
-        errorLogin.innerText = `Los campos no pueden estar vacíos`;
+        localStorage.removeItem("user");
+        btnLogin.innerText = "Ingresar";
+        location.reload();
     }
 
 })
