@@ -1,0 +1,65 @@
+[
+   {
+      "item":1,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Shampoo sólido",
+      "descripcion":"Shampoo sólido",
+      "precio":500
+   },
+   {
+      "item":2,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Crema facial",
+      "descripcion":"Crema facial",
+      "precio":750
+   },
+   {
+      "item":3,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Crema corporal",
+      "descripcion":"Crema corporal",
+      "precio":1200
+   },
+   {
+      "item":4,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Shampoo líquido",
+      "descripcion":"Shampoo líquido",
+      "precio":500
+   },
+   {
+      "item":5,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Crema de anjuague",
+      "descripcion":"Crema de anjuague",
+      "precio":750
+   },
+   {
+      "item":6,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Jabón natural",
+      "descripcion":"Jabón natural",
+      "precio":800
+   },
+   {
+      "item":7,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Desodorante",
+      "descripcion":"Desodorante",
+      "precio":1050
+   },
+   {
+      "item":8,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Dentrífico",
+      "descripcion":"Dentrífico",
+      "precio":950
+   },
+   {
+      "item":9,
+      "img":"../media/images/shampoosolido.jpg",
+      "nombre":"Crema de enjuague sólida",
+      "descripcion":"Crema de enjuague sólida",
+      "precio":1150
+   }
+]

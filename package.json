@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "file-fetch": "^1.7.0",
+    "sweetalert": "^2.1.2"
+  }
+}

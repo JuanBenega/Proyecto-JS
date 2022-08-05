@@ -20,7 +20,7 @@ footer {
   align-items: center;
 }
 
-#productos div button, .turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
+.swal-button, #productos div button, .turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
   background-color: #67b967;
   border-radius: 10px;
   color: lightgray;
@@ -28,7 +28,7 @@ footer {
   transition: all 0.5s;
 }
 
-#productos div button:hover, .turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
+.swal-button:hover, #productos div button:hover, .turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
   background-color: lightgray;
   color: white;
   box-shadow: none;
@@ -314,6 +314,29 @@ footer nav div div div ul li a:hover {
 }
 #productos div button:hover {
   transform: scale(110%);
+}
+#productos div #cardsDom h5 {
+  font-weight: bold;
+}
+#productos div #cardsDom p {
+  font-size: 1.1rem;
+}
+
+.swal-button {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  padding: 5px 19px;
+}
+.swal-button:hover {
+  transform: scale(110%);
+}
+
+.swal-modal {
+  font-family: "Poppins", sans-serif;
+}
+
+.swal-text {
+  font-size: 1.3rem;
 }
 
 /*# sourceMappingURL=style.css.map */
