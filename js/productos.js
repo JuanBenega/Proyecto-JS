@@ -12,32 +12,28 @@ msgLogin = document.querySelector("#msgLogin");
 
 
 // Variables ********************************************************************************************
-let carrito = leerCarritoLS() || [];
+let productos = [], carrito = leerCarritoLS() || [];
 let totalCompra = 0;
 let carritoLS, mailLS, passLS;
 
 
 // Objetos **********************************************************************************************
-const productos = [];
-/*const leerProd = async () => {
-    const respuesta = await fetch ("../src/data/productos.json");
+// Leo de mi base de datos de productos
+async function leerProdJson() {
+    const respuesta = await fetch('../data/productos.json');
     const prods = await respuesta.json();
-for (const item of prods) {
-    productos.push()=prods[item];
+    for (const item of prods) {
+        productos.push(item);
+    }
 }
-console.log(productos);
-}*/
+leerProdJson();
 
-fetch('../src/data/productos.json')
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.log(error))
-
-//leerProd();
 // Imprimo los productos en el HTML
-let html = productos.map((producto) => {
-    return (
-        `
+setTimeout(impDom, 1000);
+function impDom() {
+    let html = productos.map((producto) => {
+        return (
+            `
         <div class="col">
             <div class="card d-flex text-end border-dark h-100 mx-5">
                 <img src=${producto.img} class="card-img-top" alt="...">
@@ -49,11 +45,12 @@ let html = productos.map((producto) => {
                 </div>
             </div>
         </div>
-        `
-    );
-});
-for (const iterator of html) {
-    cardsDom.innerHTML += iterator;
+        `);
+    }
+    )
+    for (const iterator of html) {
+        cardsDom.innerHTML += iterator;
+    }
 }
 
 // Asigno cada elemento del DOM boton de compra de los productos
