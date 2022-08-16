@@ -13,7 +13,7 @@ msgLogin = document.querySelector("#msgLogin");
 
 // Variables ********************************************************************************************
 let productos = [], carrito = leerCarritoLS() || [];
-let totalCompra = 0;
+let totalCompra = 0, lecturaLS = 0;
 let carritoLS, mailLS, passLS;
 
 
@@ -29,7 +29,7 @@ async function leerProdJson() {
 leerProdJson();
 
 // Imprimo los productos en el HTML
-setTimeout(impDom, 1000);
+setTimeout(impDom, 500);
 function impDom() {
     let html = productos.map((producto) => {
         return (
@@ -41,7 +41,7 @@ function impDom() {
                     <h5 class="card-title text-start">${producto.nombre}</h5>
                     <p class="card-text text-start">${producto.descripcion}</p>
                     <h5 class="card-text">$${producto.precio}</h5>
-                    <button type="button" class="btn align-self-end" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
+                    <button type="button" class="btn disabled align-self-end" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
                 </div>
             </div>
         </div>
@@ -51,12 +51,14 @@ function impDom() {
     for (const iterator of html) {
         cardsDom.innerHTML += iterator;
     }
+    // Asigno cada elemento del DOM boton de compra de los productos
+    productos.forEach(element => {
+        btnProd.push(document.querySelector(`#btnProd${element.item}`));
+    });
 }
 
-// Asigno cada elemento del DOM boton de compra de los productos
-productos.forEach(element => {
-    btnProd.push(document.querySelector(`#btnProd${element.item}`));
-});
+
+
 
 class carritoProd {
     constructor(cant, nombre, total) {
@@ -179,6 +181,23 @@ function clearLogin() {
 
 // Eventos **************************************************************************************************
 
+<<<<<<< HEAD
+=======
+// Deshabilito los botones de compra si no hay un usuario logeado
+window.addEventListener("load", () => {
+    let usuarioLS = leerLS("user")
+    if (usuarioLS === null) {
+        btnCompra.className = "btn me-3 disabled";
+        msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
+    } else {
+        verifCarrito();
+        msgLogin.innerText = `Bienvenido ${usuarioLS.usuario}`;
+        btnLogin.innerText = "Salir";
+        modifClass(btnProd, "btn align-self-end");
+    }
+})
+
+>>>>>>> newCards
 // Finalización de compra
 btnCompra.addEventListener("click", () => {
     sumaCompra();
