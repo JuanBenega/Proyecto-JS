@@ -181,8 +181,7 @@ function clearLogin() {
 
 // Eventos **************************************************************************************************
 
-<<<<<<< HEAD
-=======
+
 // Deshabilito los botones de compra si no hay un usuario logeado
 window.addEventListener("load", () => {
     let usuarioLS = leerLS("user")
@@ -197,7 +196,7 @@ window.addEventListener("load", () => {
     }
 })
 
->>>>>>> newCards
+
 // Finalización de compra
 btnCompra.addEventListener("click", () => {
     sumaCompra();
