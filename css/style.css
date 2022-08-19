@@ -301,6 +301,10 @@ footer nav div div div ul li a:hover {
 #productos div div #btnCompra {
   font-size: 1.3rem;
 }
+#productos div div #registro {
+  text-decoration: none;
+  color: black;
+}
 #productos div #carrito div h2 {
   font-weight: bold;
   justify-self: center;
