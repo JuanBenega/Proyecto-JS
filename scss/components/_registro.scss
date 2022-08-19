@@ -1,0 +1,30 @@
+.registro {
+    font-family: $fuente;
+    font-size: $size-fuente-header;
+
+    h1 {
+        @extend %texto-titulos;
+        padding: $pad-h1;
+    }
+
+    div {
+        form {
+            div {
+                button {
+                    @extend %boton-menu;
+                    width: 15rem;
+                    font-size: $size-fuente-btn-registro;
+
+
+                    &:hover {
+                        @extend %boton-menu-hover;
+                        transform: scale(110%);
+                    }
+                }
+            }
+        }
+
+    }
+
+
+}

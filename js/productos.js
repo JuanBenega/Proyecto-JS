@@ -8,7 +8,7 @@ const carritoDom = document.querySelector(".carritoDom"), cartelCompra = documen
     saludoCompra = document.querySelector("#saludoCompra");
 const inputEmail = document.querySelector("#input-email"), inputPass = document.querySelector("#input-pass"),
     btnLogin = document.querySelector("#btnLogin"), errorLogin = document.querySelector("#errorLogin")
-msgLogin = document.querySelector("#msgLogin");
+msgLogin = document.querySelector("#msgLogin"), registro=document.querySelector("#registro");
 
 
 // Variables ********************************************************************************************
@@ -188,6 +188,7 @@ window.addEventListener("load", () => {
     if (usuarioLS === null) {
         btnCompra.className = "btn me-3 disabled";
         msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
+        errorLogin.innerText = ``
     } else {
         verifCarrito();
         msgLogin.innerText = `Bienvenido ${usuarioLS.usuario}`;
@@ -246,6 +247,9 @@ btnLogin.addEventListener("click", (e) => {
     }
 
 })
+
+
+
 
 
 

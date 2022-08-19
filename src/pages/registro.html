@@ -89,41 +89,113 @@
         <h1>Registro de usuarios para compra de productos</h1>
         <div class="row">
             <!-- Formulario de registro de usuario -->
-            <form>
-                <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regName" class="form-label">Nombre *</label>
-                    <input type="text" class="form-control" id="regNombre">
-                </div>
-                <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regLastname" class="form-label">Apellido *</label>
-                    <input type="text" class="form-control" id="regApellido">
-                </div>
-                <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regMail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="regMail">
-                </div>
-                <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regDirCalle" class="form-label">Dirección</label>
-                    <input type="text" class="form-control" id="regDirCalle">
-                  </div>
-                  <div class="mb-3 col-lg-3 col-sm-8">
-                    <label for="regDirNum" class="form-label">Dirección número</label>
-                    <input type="text" class="form-control" id="regDirNum">
-                  </div>
-                  <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regDirLoc" class="form-label">Localidad</label>
-                    <input type="text" class="form-control" id="regDirLoc">
-                  </div>
-                  <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regDirProv" class="form-label">Provincia</label>
-                    <input type="text" class="form-control" id="regDirProv">
-                  </div>
-                <div class="mb-3 col-lg-5 col-sm-8">
-                    <label for="regPass" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="regPass">
-                </div>
-                <button type="submit" class="btn btn-primary" id="btnReg">Submit</button>
-            </form>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <form>
+                    <div class="row">
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="regNombre">
+                        </div>
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regLastname" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="regApellido">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regMail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="regMail">
+                        </div>
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regPass" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="regPass">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-lg-9 col-sm-8">
+                            <label for="regDirCalle" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="regDirCalle">
+                        </div>
+                        <div class="mb-3 col-lg-3 col-sm-8">
+                            <label for="regDirNum" class="form-label">Número</label>
+                            <input type="text" class="form-control" id="regDirNum">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regDirLoc" class="form-label">Localidad</label>
+                            <input type="text" class="form-control" id="regDirLoc">
+                        </div>
+                        <div class="mb-3 col-lg-6 col-sm-8">
+                            <label for="regDirProv" class="form-label">Provincia</label>
+                            <input type="text" class="form-control" id="regDirProv">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-8 p-5 mt-2 d-flex justify-content-center">
+                        <button type="submit" class="btn" id="btnReg">Registrar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-lg-2"></div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!-- <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <form>
+                    <div class="mb-3 justify-self-center">
+                        <label for="regName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="regNombre">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regLastname" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="regApellido">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regMail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="regMail">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regDirCalle" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="regDirCalle">
+                    </div>
+                    <div class="mb-3 col-lg-3 col-sm-8">
+                        <label for="regDirNum" class="form-label">Dirección número</label>
+                        <input type="text" class="form-control" id="regDirNum">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regDirLoc" class="form-label">Localidad</label>
+                        <input type="text" class="form-control" id="regDirLoc">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regDirProv" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="regDirProv">
+                    </div>
+                    <div class="mb-3 col-lg-5 col-sm-8">
+                        <label for="regPass" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="regPass">
+                    </div>
+                    <div class="col-lg-5 col-sm-8 mt-4 d-flex justify-content-end">
+                        <button type="submit" class="btn" id="btnReg">Registrar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4"></div> -->
         </div>
     </main>
 

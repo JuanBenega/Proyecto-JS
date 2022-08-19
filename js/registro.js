@@ -5,33 +5,29 @@ const regNombre = document.querySelector('#regNombre'), regApellido = document.q
 
 const btnReg = document.querySelector('#btnReg');
 
+
+
 // Funciones *******************************************************************************
-function leerLS(categoria) {
-    let datos = JSON.parse(localStorage.getItem(categoria));
-    return datos;
+function leerLS() {
+    let usuarioJSON = JSON.parse(localStorage.getItem("userReg"));
+    return(usuarioJSON);
 }
 
 function guardarLS(categoria, objeto) {
     localStorage.setItem(categoria, JSON.stringify(objeto));
 }
 
-function verifDatos (objeto) {
+function verifDatos(objeto) {
+    //cuento los campos completados
     let cont = 0;
-    
+    //for (const objeto of entrada) {
     for (const dato in objeto) {
         objeto[dato] != "" ? cont++ : cont--;
     }
-
-    return cont;
-}
-
-
-function guardarUsuario (usuario) {
-    let campoVacio=verifDatos(usuario);
-    if (campoVacio == 8) {
-        guardarLS("regUser", usuario);
+    //}
+    if (cont == 8) {
         swal({
-            title: `Bienvenido ${usuario.nombre} ${usuario.apellido}`,
+            title: `Bienvenido ${objeto.nombre} ${objeto.apellido}`,
             text: "Muchas gracias por registrate en nuestro sitio",
             icon: "success",
             timer: 5000,
@@ -45,45 +41,80 @@ function guardarUsuario (usuario) {
             button: "Salir",
         });
     }
+    // si todos los campos están completos devuelvo 8
+    return cont;
 }
 
 
 // Eventos del DOM *************************************************************************************
 btnReg.addEventListener("click", (e) => {
     e.preventDefault();
+    let existNombre = false, existUser = false, camposVacios, usuarios=[], usuarioLS=[];
+    // leo los datos del DOM
     let regUser = {
-        nombre: regNombre.value,
-        apellido: regApellido.value,
-        mail: regMail.value,
-        dir: regDirCalle.value,
-        numero: regDirNum.value,
-        localidad: regDirLoc.value,
-        provincia: regDirProv.value,
+        nombre: regNombre.value.toLowerCase(),
+        apellido: regApellido.value.toLowerCase(),
+        mail: regMail.value.toLowerCase(),
+        dir: regDirCalle.value.toLowerCase(),
+        numero: regDirNum.value.toLowerCase(),
+        localidad: regDirLoc.value.toLowerCase(),
+        provincia: regDirProv.value.toLowerCase(),
         pass: regPass.value
     };
-    let usuarioLS = leerLS("regUser"), existUser = false;
+    
 
+    usuarioLS=leerLS();
     if (usuarioLS === null) {
-        guardarUsuario (regUser);
+        // Si no existen usuarios creados guardo el usuario nuevo
+        // verifico que no haya campos vacíos
+        verifDatos(regUser) == 8 && usuarios.push(regUser);
+
+        guardarLS("userReg",usuarios);
 
     } else {
-
-        console.log(usuarioLS);
-        /*usuarioLS.forEach(element => {
-            element.nombre != regUser.nombre && element.apellido === regUser.apellido && existUser=true;
+        // Si existen usuarios verifico que el nuevo no coincida con ninguno anterior
+        if (verifDatos(regUser) == 8) {
+            // recorro los usuarios registrados
+            for (const usuario of usuarioLS) {
+                    for (const key in usuario) {
+                        switch (usuario[key]) {
+                            case regUser.nombre:
+                                existNombre = true;
+                                break;
+                            case regUser.apellido:
+                                existNombre ? existUser = true : existUser = false;
+                                break;
+                            case regUser.mail:
+                                existUser = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+            }
             if (existUser) {
                 swal({
                     title: "Este usuario ya está registrado",
-                    text: `Por favor vuelva a completar los datos`,
+                    text: `Por favor revise los datos cargados`,
                     icon: "warning",
                     button: "Salir",
                 });
-                location.reload();
+            } else {
+                // Si el usuario no coincide con ninguno de los creados, lo guardo
+                usuarios.push(regUser);
+                for (const iterator of usuarioLS) {
+                    usuarios.push(iterator);    
+                }
+                guardarLS("userReg",usuarios);
             }
-        });*/
-
+        }
     }
 
 })
+
+
+
+
+
 
 
