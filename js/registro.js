@@ -20,21 +20,19 @@ function guardarLS(categoria, objeto) {
 function verifDatos(objeto) {
     //cuento los campos completados
     let cont = 0;
-    //for (const objeto of entrada) {
     for (const dato in objeto) {
         objeto[dato] != "" ? cont++ : cont--;
     }
-    //}
     if (cont == 8) {
         swal({
             title: `Bienvenido ${objeto.nombre} ${objeto.apellido}`,
             text: "Muchas gracias por registrate en nuestro sitio",
             icon: "success",
             timer: 5000,
+        })
+        .then((value) => {
+            document.location.href = "../pages/productos.html"
         });
-        let demora = window.setTimeout(document.location.href = "../pages/productos.html", 5000);
-        window.clearTimeout(demora);
-        //location.reload();
     } else {
         swal({
             title: "Los datos no pueden estar vacíos",

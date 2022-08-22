@@ -20,15 +20,16 @@ footer {
   align-items: center;
 }
 
-.registro div form div button, .swal-button, #productos div button, .turno div div div form div .boton, header nav div div ul li .menu-servicios li a, header nav div div ul li a {
+.registro div form div button, .swal-button, #productos div button, .turno div div div form div .boton, header .btnClose, header #btnCompra, header nav div div ul li .menu-servicios li a, header nav div div ul li .btnNav {
   background-color: #67b967;
   border-radius: 10px;
+  border-style: none;
   color: lightgray;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.438);
   transition: all 0.5s;
 }
 
-.registro div form div button:hover, .swal-button:hover, #productos div button:hover, .turno div div div form div .boton:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li a:hover {
+.registro div form div button:hover, .swal-button:hover, #productos div button:hover, .turno div div div form div .boton:hover, header .btnClose:hover, header #btnCompra:hover, header nav div div ul li .menu-servicios li a:hover, header nav div div ul li .btnNav:hover {
   background-color: lightgray;
   color: white;
   box-shadow: none;
@@ -53,6 +54,7 @@ header nav {
   /*estilo Nav Header*/
   width: 95%;
   padding-left: 75px;
+  font-family: "Poppins", sans-serif;
 }
 header nav div a {
   width: 25%;
@@ -65,16 +67,15 @@ header nav div a:hover {
     width: 60%;
   }
 }
-header nav div div ul li a {
-  font-family: "Poppins", sans-serif;
+header nav div div ul li .btnNav {
   font-size: 1.3rem;
   width: auto;
 }
-header nav div div ul li a:hover {
+header nav div div ul li .btnNav:hover {
   transform: scale(110%);
 }
 @media only screen and (max-width: 576px) {
-  header nav div div ul li a {
+  header nav div div ul li .btnNav {
     font-size: 1rem;
     padding-left: 10px;
   }
@@ -103,6 +104,38 @@ header nav div div ul li .menu-servicios li a:hover {
   header nav {
     width: auto;
     padding-left: 0px;
+  }
+}
+header .carritoDom {
+  list-style: none;
+}
+header #btnCompra {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  width: auto;
+}
+header #btnCompra:hover {
+  transform: scale(110%);
+}
+@media only screen and (max-width: 576px) {
+  header #btnCompra {
+    font-size: 1rem;
+    padding-left: 10px;
+  }
+}
+header .btnClose {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  width: auto;
+  background-color: rgba(255, 0, 0, 0.685);
+}
+header .btnClose:hover {
+  transform: scale(110%);
+}
+@media only screen and (max-width: 576px) {
+  header .btnClose {
+    font-size: 1rem;
+    padding-left: 10px;
   }
 }
 
@@ -305,16 +338,8 @@ footer nav div div div ul li a:hover {
   text-decoration: none;
   color: black;
 }
-#productos div #carrito div h2 {
+#productos div div h3 {
   font-weight: bold;
-  justify-self: center;
-}
-#productos div #carrito div div ul {
-  border-style: solid;
-  border-color: black;
-  border-radius: 5px;
-  border-width: 1px;
-  list-style: none;
 }
 #productos div button:hover {
   transform: scale(110%);

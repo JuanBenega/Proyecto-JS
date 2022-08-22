@@ -5,6 +5,7 @@ header {
         /*estilo Nav Header*/
         width: 95%;
         padding-left: 75px;
+        font-family: $fuente;
 
         div {
             a {
@@ -24,8 +25,9 @@ header {
 
                 ul {
                     li {
-                        a {
-                            font-family: $fuente;
+
+                        .btnNav {
+
                             font-size: $size-fuente-header;
                             width: auto;
                             @extend %boton-menu;
@@ -46,19 +48,19 @@ header {
                             background-clip: unset;
                             border-radius: unset;
                             border: unset;
-
+                            
                             li {
                                 a {
                                     font-family: $fuente;
                                     font-size: $size-fuente-header;
                                     width: auto;
                                     @extend %boton-menu;
-        
+
                                     &:hover {
                                         @extend %boton-menu-hover;
                                         transform: scale(110%);
                                     }
-        
+
                                     @include phone {
                                         font-size: $size-fuente-responsive;
                                         padding-left: 10px;
@@ -77,4 +79,45 @@ header {
             padding-left: 0px;
         }
     }
+
+    .carritoDom {
+        list-style: none;
+    }
+
+    #btnCompra {
+        font-family: $fuente;
+        font-size: $size-fuente-header;
+        width: auto;
+        @extend %boton-menu;
+
+        &:hover {
+            @extend %boton-menu-hover;
+            transform: scale(110%);
+        }
+
+        @include phone {
+            font-size: $size-fuente-responsive;
+            padding-left: 10px;
+        }
+    }
+
+    .btnClose {
+        font-family: $fuente;
+        font-size: $size-fuente-header;
+        width: auto;
+        @extend %boton-menu;
+        background-color: rgba(255, 0, 0, 0.685);
+
+
+        &:hover {
+            @extend %boton-menu-hover;
+            transform: scale(110%);
+        }
+
+        @include phone {
+            font-size: $size-fuente-responsive;
+            padding-left: 10px;
+        }
+    }
+
 }

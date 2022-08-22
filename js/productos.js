@@ -5,16 +5,17 @@
 const btnProd = [], btnCompra = document.querySelector("#btnCompra"), cardsDom = document.querySelector("#cardsDom");
 
 const carritoDom = document.querySelector(".carritoDom"), cartelCompra = document.querySelector("#cartelCompra"),
-    saludoCompra = document.querySelector("#saludoCompra");
+    saludoCompra = document.querySelector("#saludoCompra"), cantCarrito = document.querySelector("#cantCarrito");
 const inputEmail = document.querySelector("#input-email"), inputPass = document.querySelector("#input-pass"),
     btnLogin = document.querySelector("#btnLogin"), errorLogin = document.querySelector("#errorLogin")
-msgLogin = document.querySelector("#msgLogin"), registro=document.querySelector("#registro");
+msgLogin = document.querySelector("#msgLogin"), registro = document.querySelector("#registro");
 
 
 // Variables ********************************************************************************************
-let productos = [], carrito = leerCarritoLS() || [];
+let productos = [], carrito = leerCarritoLS() || [], carritoCant = 0;
 let totalCompra = 0, lecturaLS = 0;
 let carritoLS, mailLS, passLS;
+let existUser = false;
 
 
 // Objetos **********************************************************************************************
@@ -41,7 +42,7 @@ function impDom() {
                     <h5 class="card-title text-start">${producto.nombre}</h5>
                     <p class="card-text text-start">${producto.descripcion}</p>
                     <h5 class="card-text">$${producto.precio}</h5>
-                    <button type="button" class="btn disabled align-self-end" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Comprar</button>
+                    <button type="button" class="btn disabled align-self-end" id="btnProd${producto.item}" onClick="cargarCarrito(${producto.item})">Agregar</button>
                 </div>
             </div>
         </div>
@@ -57,14 +58,12 @@ function impDom() {
     });
 }
 
-
-
-
 class carritoProd {
-    constructor(cant, nombre, total) {
+    constructor(cant, nombre, total, item) {
         this.cant = cant;
         this.nombre = nombre;
         this.total = total;
+        this.item = item;
     }
 }
 
@@ -73,6 +72,7 @@ class carritoProd {
 // Cargo el carrito de compras
 function cargarCarrito(prod) {
     let prodCarrito = productos.find(p => p.item === prod);
+    // imprimo un tostify con el item cargado
     Toastify({
         text: `${prodCarrito.nombre} agregado`,
         duration: 2000,
@@ -88,7 +88,7 @@ function cargarCarrito(prod) {
         },
     }).showToast();
     let transito, prodExiste = false;
-    const { nombre, precio } = prodCarrito;
+    const { nombre, precio, item } = prodCarrito;
     // verifico si el producto elegido ya está en el carrito
     for (const iterator of carrito) {
         if (iterator.nombre == nombre) {
@@ -97,9 +97,9 @@ function cargarCarrito(prod) {
             prodExiste = true;
         }
     }
-    // verifico si el carrito está vacío
+    // verifico si el carrito está vacío o si el producto no está en el carrito
     if (carrito.length == 0 || prodExiste == false) {
-        transito = new carritoProd(1, nombre, precio);
+        transito = new carritoProd(1, nombre, precio, item);
         carrito.push(transito);
     }
     // imprimo el carrito en el DOM
@@ -114,11 +114,44 @@ function impCarrito() {
     borrarCarritoDom();
     // Imprimo el carrito en el DOM
     for (const iterator of carrito) {
-        item = `${iterator.cant} ${iterator.nombre} $${iterator.total}`;
+        item = `<a href="#" id="botX" style="none" onClick="reducirCarrito(${iterator.item})">&#10060</a> ${iterator.cant} ${iterator.nombre} $${iterator.total}`;
         let li = document.createElement("li");
         li.innerHTML = item;
         carritoDom.appendChild(li);
+        sumaCompra();
+        cartelCompra.innerText = `Total: $${totalCompra}`;
+        totalCompra = 0;
     }
+    // muestro la cantidad de productos en el botón
+    for (const iterator of carrito) {
+        carritoCant += iterator.cant;
+    }
+    cantCarrito.innerText = carritoCant;
+    carritoCant = 0;
+}
+
+function reducirCarrito(prod) {
+    let prodCarrito = productos.find(p => p.item === prod);
+    const { item, precio } = prodCarrito;
+    for (const iterator of carrito) {
+        if (iterator.item == item) {
+            if (iterator.cant > 1) {
+                iterator.cant--;
+                iterator.total -= precio;
+            } else if (carrito.length > 1) {
+                carrito.splice(iterator, 1);
+                iterator.total -= precio;
+            } else {
+                carrito.splice(iterator, 1);
+                iterator.total -= precio;
+                totalCompra = 0;
+                cartelCompra.innerText = ``;
+            }
+
+        }
+    }
+    // imprimo el carrito en el DOM
+    impCarrito();
 }
 
 function verifCarrito() {
@@ -126,8 +159,12 @@ function verifCarrito() {
         let li = document.createElement("li");
         li.innerHTML = "Por favor elija un producto";
         carritoDom.appendChild(li);
+        btnCompra.className = "btn me-3 disabled";
     } else {
         impCarrito();
+        btnCompra.className = "btn me-3";
+        //btnProd[0].className = "btn align-self-end";
+
     }
 }
 
@@ -169,7 +206,7 @@ function borrarCarritoDom() {
 function modifClass(array, attr) {
     // Modifico las clases de los elementos del DOM del array
     for (const boton of array) {
-        boton.className = attr;
+        boton.className = `${attr}`;
     }
 }
 
@@ -179,39 +216,73 @@ function clearLogin() {
     inputPass.value = "";
 }
 
+function verifUser(mail, pass) {
+    let nombre, apellido, existeMail = false, existeUser = false, usuarioLS = leerLS("userReg");
+    for (const usuario of usuarioLS) {
+        for (const key in usuario) {
+            switch (usuario[key]) {
+                case mail:
+                    existeMail = true;
+                    nombre = usuario.nombre;
+                    apellido = usuario.apellido;
+                    break;
+                case pass:
+                    existeMail ? existUser = true : existUser = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    return (`${nombre} ${apellido}`);
+}
+
 // Eventos **************************************************************************************************
 
 
 // Deshabilito los botones de compra si no hay un usuario logeado
 window.addEventListener("load", () => {
-    let usuarioLS = leerLS("user")
+    let usuarioLS = leerLS("user");
     if (usuarioLS === null) {
         btnCompra.className = "btn me-3 disabled";
-        msgLogin.innerText = `Debe iniciar sesión para seleccionar productos`;
+        msgLogin.innerText = `Inicie sesión para comprar`;
         errorLogin.innerText = ``
     } else {
+        let nombre = verifUser(usuarioLS.usuario, usuarioLS.pass)
         verifCarrito();
-        msgLogin.innerText = `Bienvenido ${usuarioLS.usuario}`;
+        msgLogin.innerText = `Bienvenido ${nombre}`;
+        // msgLogin.className = "color= red";
         btnLogin.innerText = "Salir";
-        modifClass(btnProd, "btn align-self-end");
+        setTimeout(() => {
+            modifClass(btnProd, "btn align-self-end");
+        }, 1000);
+
     }
 })
 
 
 // Finalización de compra
 btnCompra.addEventListener("click", () => {
+    let numPedido = Math.floor(Math.random() * 10000);
     sumaCompra();
     if (totalCompra != 0) {
         localStorage.removeItem("prod");
         carrito = [];
         swal({
-            title: "¡Muchas gracias por elegirnos!",
-            text: `El total de la compra es $${totalCompra}.`,
+            title: `El total de la compra es $${totalCompra}.\n¡Muchas gracias por elegirnos!`,
+            text: `Tu número de pedido es ID${numPedido}.\nTe enviaremos por mail el link de pago y seguimiento de pedido.`,
             icon: "success",
             button: "Salir",
-        });
-        borrarCarritoDom();
-        totalCompra = 0;
+        })
+            .then(() => {
+                borrarCarritoDom();
+                totalCompra = 0;
+                cartelCompra.innerText = "";
+                cantCarrito.innerText = carrito.length;
+                localStorage.removeItem("user");
+                location.reload();
+            });
+
     } else {
         swal({
             title: "El carrito está vacío",
@@ -226,24 +297,51 @@ btnCompra.addEventListener("click", () => {
 // Login de usuario
 btnLogin.addEventListener("click", (e) => {
     e.preventDefault();
-    let user = { usuario: inputEmail.value, pass: inputPass.value }, usuarioLS = leerLS("user");
+    let user = { usuario: inputEmail.value.toLowerCase(), pass: inputPass.value.toLowerCase() }, usuarioLS = leerLS("userReg");
+    // verifico si hay usuarios registrados
     if (usuarioLS === null) {
         if (user.usuario && user.pass) {
-            guardarLS("user", user);
-            verifCarrito();
-            msgLogin.innerText = `Bienvenido ${user.usuario}`;
-            btnLogin.innerText = "Salir";
-            errorLogin.innerText = ``;
-            modifClass(btnProd, "btn align-self-end");
-            clearLogin();
-
+            swal({
+                title: "Usuario no encontrado",
+                text: "Debe registrarse para porder comprar con nostros",
+                icon: "info",
+                button: "Registrar",
+            })
+                .then(() => {
+                    document.location.href = "../pages/registro.html"
+                });
         } else {
-            errorLogin.innerText = `Los campos no pueden estar vacíos`;
+            swal({
+                title: "Los campos no pueden estar vacíos",
+                icon: "warning",
+                button: "Ok",
+            });
         }
     } else {
-        localStorage.removeItem("user");
-        btnLogin.innerText = "Ingresar";
-        location.reload();
+        let nombre;
+        // verifico si el usuario ingresado coincide con uno registrado
+        nombre = verifUser(user.usuario, user.pass);
+        if (existUser) {
+            swal({
+                title: `Bienvenido ${nombre}`,
+                icon: "success",
+                button: "Ok",
+            })
+            msgLogin.innerText = `Bienvenido ${nombre}`;
+            btnLogin.innerText = "Salir";
+            modifClass(btnProd, "btn align-self-end");
+            btnCompra.className = "btn me-3";
+            clearLogin();
+            verifCarrito();
+            guardarLS("user", user);
+            existUser = false;
+        } else {
+            swal({
+                title: "Datos incorrectos",
+                icon: "error",
+                button: "Ok",
+            });
+        }
     }
 
 })

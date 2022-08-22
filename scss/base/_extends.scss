@@ -14,6 +14,7 @@
  %boton-menu {
     background-color: $color-prim;
     border-radius: 10px;
+    border-style: none;
     color: $color-sec;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.438);
     transition: all 0.5s;
@@ -23,6 +24,15 @@
     background-color: $color-sec;
     color: $color-fondo;
     box-shadow: none;
+}
+
+%boton-close {
+    background-color: red;
+    border-radius: 10px;
+    border-style: none;
+    color: $color-sec;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.438);
+    transition: all 0.5s;
 }
 
 %sombra-imagenes {

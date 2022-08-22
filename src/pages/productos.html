@@ -53,33 +53,65 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link m-2 p-2" href="../../index.html">Nosotros</a>
+                            <a class="nav-link m-2 p-2 btnNav" href="../../index.html">Nosotros</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link m-2 p-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            <a class="nav-link m-2 p-2 dropdown-toggle btnNav" href="#" id="navbarDropdownMenuLink"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
                             <ul class="dropdown-menu menu-servicios" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
-                                    <a class="dropdown-item m-2 p-2"
+                                    <a class="dropdown-item m-2 p-2 btnNav"
                                         href="../pages/entrenamiento.html">Entrenamiento</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item m-2 p-2" href="../pages/masajes.html">Masajes</a>
+                                    <a class="dropdown-item m-2 p-2 btnNav" href="../pages/masajes.html">Masajes</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item m-2 p-2" href="../pages/productos.html">Productos</a>
+                                    <a class="dropdown-item m-2 p-2 btnNav" href="../pages/productos.html">Productos</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link m-2 p-2" href="../pages/bienestar.html">Artículos de Binestar</a>
+                            <a class="nav-link m-2 p-2 btnNav" href="../pages/bienestar.html">Artículos de Binestar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link m-2 p-2" href="../pages/contacto.html">Contacto</a>
+                            <a class="nav-link m-2 p-2 btnNav" href="../pages/contacto.html">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="m-2 p-2 btnNav" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <img src="../media/images/carrito.png"  alt=""><span id="cantCarrito" class="mx-3"> 0</span>
+                            </button>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Carrito de compras</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="carritoDom"></ul>
+                            <h4 class="my-3 d-flex justify-content-end" id="cartelCompra"></h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn me-3" id="btnCompra">
+                                Finalizar Compra
+                            </button>
+                            <button type="button" class="btn btnClose" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
         </nav>
         <!-- Fin Navbar -->
     </header>
@@ -89,18 +121,18 @@
         <div class="container-fluid">
             <h1>Bienvenido a nuestro shop, esperamos que disfrutes tu compra.</h1>
             <div class="row my-4 me-3">
-                <div class="col-md-6" class="align-items-center">
-                    <h4 id="msgLogin"></h4>
+                <div class="col-md-6 d-flex justify-content-center align-items-start">
+                    <h3 id="msgLogin"></h3>
                 </div>
                 <!-- login de usuario -->
                 <div class="col-md-6">
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <input type="email" class="form-control" id="input-email" placeholder="Ingrese email" />
+                            <input type="email" class="form-control" id="input-email" placeholder="Ingrese su email" />
                         </div>
                         <div class="col-md-5">
                             <input type="password" class="form-control" id="input-pass"
-                                placeholder="Ingrese Password" />
+                                placeholder="Ingrese su password" />
                         </div>
                         <div class="col-md-2">
                             <button type="submit" class="btn" id="btnLogin">
@@ -116,40 +148,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Carrito de compras -->
-            <div class="row my-3 d-flex justify-content-center" id="carrito">
-                <div class="col-md-6">
-                    <!-- impresión de carrito de compras -->
-                    <h2>Carrito de compras</h2>
-                    <div>
-                        <ul class="carritoDom"></ul><!-- Contenido dinamico del carrito -->
-                    </div>
-                    <!-- suma de la compra y saludo final -->
-                    <h3 class="my-3 d-flex justify-content-end" id="cartelCompra"></h3>
-                    <h2 class="my-4 d-flex justify-content-center" id="saludoCompra"></h2>
-                </div>
-            </div>
-            <div class="col-md-12 my-3 d-flex justify-content-end">
-                <!-- botón de compra -->
-                <button type="button" class="btn me-3" id="btnCompra">
-                    Finalizar Compra
-                </button>
-            </div>
             <!-- listado de productos -->
             <div class="row row-cols-1 row-cols-md-3 g-4" id="cardsDom">
                 <!-- Cards dinámicas -->
             </div>
-            
-
         </div>
-
-
-
-
-
-
-
-
     </main>
 
 

@@ -23,30 +23,12 @@
                 text-decoration: none;
                 color: black;
             }
-        }
 
-        #carrito {
-
-
-            div {
-
-                h2 {
-                    font-weight: bold;
-                    justify-self: center;
-                }
-
-                div {
-                    ul {
-                        border-style: solid;
-                        border-color: black;
-                        border-radius: 5px;
-                        border-width: 1px;
-                        list-style: none;
-                    }
-                }
+            h3 {
+                font-weight: bold;
             }
-
         }
+
 
         button {
             @extend %boton-menu;
