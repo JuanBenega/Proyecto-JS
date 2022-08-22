@@ -1,6 +1,3 @@
-//import swal from 'sweetalert';
-
-
 // Elementos del DOM **************************************************************************************
 const btnProd = [], btnCompra = document.querySelector("#btnCompra"), cardsDom = document.querySelector("#cardsDom");
 
@@ -19,6 +16,7 @@ let existUser = false;
 
 
 // Objetos **********************************************************************************************
+
 // Leo de mi base de datos de productos
 async function leerProdJson() {
     const respuesta = await fetch('../data/productos.json');
@@ -163,8 +161,6 @@ function verifCarrito() {
     } else {
         impCarrito();
         btnCompra.className = "btn me-3";
-        //btnProd[0].className = "btn align-self-end";
-
     }
 }
 
@@ -251,7 +247,6 @@ window.addEventListener("load", () => {
         let nombre = verifUser(usuarioLS.usuario, usuarioLS.pass)
         verifCarrito();
         msgLogin.innerText = `Bienvenido ${nombre}`;
-        // msgLogin.className = "color= red";
         btnLogin.innerText = "Salir";
         setTimeout(() => {
             modifClass(btnProd, "btn align-self-end");
